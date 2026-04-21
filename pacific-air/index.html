@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pacific Air Solutions — Smart HVAC, Smarter Business | Thousand Oaks, CA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0052cc;
+      --blue-dark: #003d99;
+      --blue-light: #2563eb;
+      --blue-soft: #eff6ff;
+      --blue-mid: #dbeafe;
+      --sky: #0ea5e9;
+      --sky-soft: #e0f2fe;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --font: 'Inter', sans-serif;
+      --blue-glow: rgba(0,82,204,0.15);
+      --blue-glow-strong: rgba(0,82,204,0.3);
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+      --card-shadow-hover: 0 8px 32px rgba(0,82,204,0.12), 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER STRIPE ── */
+    .top-stripe {
+      background: var(--blue);
+      padding: 8px 24px;
+      text-align: center;
+    }
+
+    .top-stripe-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .top-stripe a { color: #bfdbfe; text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 10px var(--blue-glow);
+    }
+
+    .nav-logo-name {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-logo-main {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .nav-logo-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.18s;
+    }
+
+    .nav-menu a:hover { color: var(--blue); background: var(--blue-soft); }
+
+    .nav-phone {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue) !important;
+    }
+
+    .nav-cta-btn {
+      background: var(--blue) !important;
+      color: white !important;
+      padding: 9px 18px !important;
+      border-radius: 8px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px var(--blue-glow) !important;
+      transition: all 0.2s !important;
+    }
+
+    .nav-cta-btn:hover {
+      background: var(--blue-dark) !important;
+      box-shadow: 0 4px 16px var(--blue-glow-strong) !important;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 50%, #f0f9ff 100%);
+      padding: 80px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,82,204,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Floating dots pattern */
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0,82,204,0.08) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border: 1.5px solid var(--blue-mid);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 20px;
+      box-shadow: 0 1px 6px var(--blue-glow);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sky);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero-headline {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+
+    .hero-headline .blue { color: var(--blue); }
+
+    .hero-subline {
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 700;
+      color: var(--gray-500);
+      letter-spacing: -0.5px;
+      margin-bottom: 18px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn-blue {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--blue);
+      color: white;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px var(--blue-glow);
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+    }
+
+    .btn-blue:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--blue-glow-strong);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: white;
+      color: var(--blue);
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1.5px solid var(--blue);
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
+    .btn-outline:hover {
+      background: var(--blue-soft);
+      transform: translateY(-1px);
+    }
+
+    .hero-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stars-row { display: flex; gap: 2px; }
+    .star-gold { color: #f59e0b; font-size: 15px; }
+
+    .social-proof-text {
+      font-size: 13px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .social-proof-text strong { color: var(--gray-800); }
+
+    .divider-dot { color: var(--gray-300); }
+
+    /* Hero Card Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hvac-dashboard {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,82,204,0.12), 0 20px 60px rgba(0,0,0,0.08);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+
+    .dashboard-topbar {
+      background: var(--blue);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .db-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .db-live {
+      font-size: 11px;
+      font-weight: 600;
+      color: #bfdbfe;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink-green 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink-green {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .dashboard-body { padding: 18px; }
+
+    .dash-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .dash-metric {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .dash-metric-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .dash-metric-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-400);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .job-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .job-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s;
+    }
+
+    .job-row.urgent {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    .job-type-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .job-type-icon.ac { background: #dbeafe; }
+    .job-type-icon.heat { background: #fef3c7; }
+    .job-type-icon.maint { background: #d1fae5; }
+
+    .job-info { flex: 1; min-width: 0; }
+    .job-name { font-size: 12px; font-weight: 700; color: var(--gray-800); }
+    .job-detail { font-size: 11px; color: var(--gray-400); }
+
+    .job-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+
+    .job-tag.scheduled { background: #dbeafe; color: var(--blue); }
+    .job-tag.urgent { background: #fee2e2; color: #dc2626; }
+    .job-tag.quoted { background: #d1fae5; color: #059669; }
+
+    .ai-status-bar {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: linear-gradient(135deg, var(--blue-soft), var(--sky-soft));
+      border: 1px solid var(--blue-mid);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-status-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .ai-status-text { font-size: 11px; color: var(--blue-dark); font-weight: 600; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--blue);
+      padding: 28px 24px;
+    }
+
+    .stats-bar-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      color: white;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* ── GENERIC SECTION ── */
+    section { position: relative; }
+
+    .section-wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .section-h2 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-p {
+      font-size: 16px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      padding: 80px 0;
+      background: var(--gray-50);
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .how-header .section-p { margin: 0 auto; }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .how-grid { grid-template-columns: 1fr; } }
+
+    .how-step {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s;
+      position: relative;
+    }
+
+    .how-step:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-3px);
+      border-color: var(--blue-mid);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .step-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .step-title { font-size: 15px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+    /* ── AI VOICE / NEVER MISS ── */
+    .ai-section {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) { .ai-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    .ai-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .ai-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .voice-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 40px;
+      margin-bottom: 18px;
+    }
+
+    .vbar {
+      flex: 1;
+      background: linear-gradient(180deg, var(--blue), var(--sky));
+      border-radius: 3px;
+      opacity: 0.75;
+      animation: vbarDance 1s ease-in-out infinite;
+    }
+
+    @keyframes vbarDance {
+      0%, 100% { transform: scaleY(0.25); }
+      50% { transform: scaleY(1); }
+    }
+
+    .transcript-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .transcript-line {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .transcript-speaker {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .transcript-speaker.ai { background: var(--blue-soft); color: var(--blue); }
+    .transcript-speaker.caller { background: var(--gray-100); color: var(--gray-600); }
+
+    .transcript-text { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+
+    .ai-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .ai-metric {
+      background: white;
+      border: 1px solid var(--blue-mid);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .ai-metric-val { font-size: 22px; font-weight: 800; color: var(--blue); }
+    .ai-metric-lbl { font-size: 11px; color: var(--gray-400); font-weight: 600; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .ai-features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .ai-feat {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .ai-feat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .ai-feat-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 3px; }
+    .ai-feat-desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+    /* ── SERVICES ── */
+    .services-section {
+      padding: 80px 0;
+      background: var(--gray-50);
+    }
+
+    .services-hdr { text-align: center; margin-bottom: 50px; }
+    .services-hdr .section-p { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+    .svc-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 26px 22px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s;
+      cursor: default;
+    }
+
+    .svc-card:hover {
+      border-color: var(--blue);
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .svc-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .svc-title { font-size: 17px; font-weight: 800; color: var(--gray-900); margin-bottom: 7px; }
+    .svc-desc { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+
+    .svc-badge {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-mid);
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .testi-hdr { text-align: center; margin-bottom: 50px; }
+    .testi-hdr .section-p { margin: 0 auto; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
+
+    .testi-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 26px 22px;
+      transition: all 0.25s;
+    }
+
+    .testi-card:hover {
+      border-color: var(--blue-mid);
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .t-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+    .t-star { font-size: 15px; color: #f59e0b; }
+
+    .t-quote {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+
+    .t-author { display: flex; align-items: center; gap: 10px; }
+
+    .t-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .t-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+    .t-loc { font-size: 12px; color: var(--gray-400); }
+
+    /* ── NEVER MISS CTA SECTION ── */
+    .lose-leads {
+      padding: 80px 0;
+      background: var(--blue);
+    }
+
+    .lose-leads-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) { .lose-leads-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .lose-text .section-tag { color: #bfdbfe; }
+    .lose-text .section-h2 { color: white; }
+    .lose-text .section-p { color: rgba(255,255,255,0.75); max-width: 100%; }
+
+    .lose-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .lose-metric {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .lose-metric-val { font-size: 26px; font-weight: 900; color: white; letter-spacing: -0.5px; }
+    .lose-metric-lbl { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+
+    .lose-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .flow-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .flow-step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: white;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .flow-title { font-size: 13px; font-weight: 700; color: white; }
+    .flow-desc { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; line-height: 1.4; }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      padding: 80px 0;
+      background: var(--gray-50);
+    }
+
+    .pricing-hdr { text-align: center; margin-bottom: 50px; }
+    .pricing-hdr .section-p { margin: 0 auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+
+    .price-card {
+      background: white;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 30px 26px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s;
+    }
+
+    .price-card.popular {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0,82,204,0.08), var(--card-shadow);
+      transform: scale(1.02);
+    }
+
+    .price-card:hover { box-shadow: var(--card-shadow-hover); }
+
+    .price-tier { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .price-name { font-size: 19px; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
+    .price-val { font-size: 40px; font-weight: 900; color: var(--blue); letter-spacing: -1px; line-height: 1; }
+    .price-val sup { font-size: 18px; vertical-align: top; margin-top: 7px; display: inline-block; }
+    .price-val span { font-size: 15px; color: var(--gray-400); font-weight: 500; }
+    .price-tagline { font-size: 13px; color: var(--gray-400); margin: 6px 0 18px; }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .price-features li::before { content: '✓'; color: var(--blue); font-weight: 800; font-size: 12px; }
+
+    .price-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .price-btn.primary { background: var(--blue); color: white; box-shadow: 0 3px 12px var(--blue-glow); }
+    .price-btn.primary:hover { background: var(--blue-dark); box-shadow: 0 6px 20px var(--blue-glow-strong); }
+    .price-btn.outline { background: transparent; color: var(--blue); border: 1.5px solid var(--gray-200); }
+    .price-btn.outline:hover { border-color: var(--blue); background: var(--blue-soft); }
+
+    /* ── CTA SECTION ── */
+    .cta-wrap {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .cta-block {
+      background: linear-gradient(135deg, var(--blue-soft), var(--sky-soft));
+      border: 1.5px solid var(--blue-mid);
+      border-radius: 20px;
+      padding: 56px 40px;
+      text-align: center;
+    }
+
+    .cta-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .cta-h2 {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .cta-h2 span { color: var(--blue); }
+
+    .cta-desc {
+      font-size: 16px;
+      color: var(--gray-500);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    .cta-trust-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    .check-blue { color: var(--blue); font-weight: 800; }
+
+    /* ── TRUST BADGES ── */
+    .trust-section {
+      padding: 48px 0;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .trust-row {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 22px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      min-width: 110px;
+    }
+
+    .trust-badge-icon { font-size: 22px; }
+    .trust-badge-text { font-size: 11px; font-weight: 700; color: var(--gray-500); text-align: center; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .footer-logo-text { font-size: 14px; font-weight: 800; color: white; }
+
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-nav a { color: var(--gray-400); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .footer-nav a:hover { color: white; }
+
+    .footer-copy { font-size: 12px; color: var(--gray-500); }
+
+    /* ── GHL CHAT WIDGET ── */
+    .ghl-chat {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+    }
+
+    .ghl-chat-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 20px rgba(0,82,204,0.4);
+      transition: all 0.25s;
+      position: relative;
+    }
+
+    .ghl-chat-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 32px rgba(0,82,204,0.5);
+    }
+
+    .ghl-notif {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ef4444;
+      border: 2px solid white;
+      font-size: 8px;
+      font-weight: 800;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ghl-popup {
+      position: absolute;
+      bottom: 68px;
+      right: 0;
+      width: 320px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,82,204,0.1);
+      overflow: hidden;
+      transform: scale(0.85) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: bottom right;
+    }
+
+    .ghl-popup.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .ghl-popup-header {
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ghl-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .ghl-header-name { font-size: 14px; font-weight: 700; color: white; }
+    .ghl-header-status { font-size: 11px; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 4px; }
+    .ghl-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+
+    .ghl-powered {
+      font-size: 10px;
+      color: rgba(255,255,255,0.6);
+      margin-left: auto;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .ghl-messages {
+      padding: 14px;
+      height: 190px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--gray-50);
+    }
+
+    .ghl-msg {
+      max-width: 82%;
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .ghl-msg.ai {
+      background: white;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-700);
+      align-self: flex-start;
+      border-radius: 4px 12px 12px 12px;
+    }
+
+    .ghl-msg.user {
+      background: var(--blue);
+      color: white;
+      align-self: flex-end;
+      border-radius: 12px 12px 4px 12px;
+    }
+
+    .ghl-quick-replies {
+      padding: 8px 14px 0;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      background: var(--gray-50);
+    }
+
+    .ghl-qr {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      background: white;
+      border: 1px solid var(--blue-mid);
+      border-radius: 100px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .ghl-qr:hover { background: var(--blue); color: white; }
+
+    .ghl-input-area {
+      padding: 10px 12px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      gap: 7px;
+      background: white;
+    }
+
+    .ghl-input {
+      flex: 1;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 13px;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .ghl-input:focus { border-color: var(--blue); background: white; }
+    .ghl-input::placeholder { color: var(--gray-400); }
+
+    .ghl-send {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--blue);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: all 0.2s;
+      color: white;
+    }
+
+    .ghl-send:hover { background: var(--blue-dark); }
+
+    .ghl-footer-bar {
+      padding: 6px 12px;
+      background: white;
+      border-top: 1px solid var(--gray-100);
+      text-align: center;
+      font-size: 10px;
+      color: var(--gray-400);
+      font-weight: 600;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Stripe -->
+  <div class="top-stripe">
+    <p class="top-stripe-text">
+      🌡️ AC Emergency in Thousand Oaks? Pacific Air responds in under 60 min, 24/7 —
+      <a href="tel:+18055550200">(805) 555-0200</a>
+    </p>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-mark">❄️</div>
+        <div class="nav-logo-name">
+          <div class="nav-logo-main">Pacific Air Solutions</div>
+          <div class="nav-logo-sub">Thousand Oaks, CA · Smart HVAC</div>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#" class="nav-phone">📞 (805) 555-0200</a></li>
+        <li><a href="#cta" class="nav-cta-btn">Get Free Demo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          Thousand Oaks' AI-Powered HVAC Company
+        </div>
+        <h1 class="hero-headline">
+          Pacific Air Solutions —<br />
+          <span class="blue">Smart HVAC,</span><br />
+          Smarter Business.
+        </h1>
+        <p class="hero-subline">AI-scheduled. Always available. Never a missed call.</p>
+        <p class="hero-desc">
+          Pacific Air Solutions serves Thousand Oaks and the Conejo Valley with 5-star HVAC service. Now our AI system handles every call, books appointments automatically, and follows up with every lead — so you never have to chase a customer again.
+        </p>
+        <div class="hero-btns">
+          <a href="#cta" class="btn-blue">📅 Book a Free Demo</a>
+          <a href="#how-it-works" class="btn-outline">▶ See How It Works</a>
+        </div>
+        <div class="hero-social-proof">
+          <div class="stars-row">
+            <span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span><span class="star-gold">★</span>
+          </div>
+          <span class="social-proof-text"><strong>5.0 stars</strong></span>
+          <span class="divider-dot">·</span>
+          <span class="social-proof-text">89 Google reviews</span>
+          <span class="divider-dot">·</span>
+          <span class="social-proof-text">Thousand Oaks, CA</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hvac-dashboard">
+          <div class="dashboard-topbar">
+            <div class="db-title">❄️ Pacific Air — AI Dashboard</div>
+            <div class="db-live"><div class="live-dot"></div> Live</div>
+          </div>
+          <div class="dashboard-body">
+            <div class="dash-row">
+              <div class="dash-metric">
+                <div class="dash-metric-val">18</div>
+                <div class="dash-metric-label">Jobs Today</div>
+              </div>
+              <div class="dash-metric">
+                <div class="dash-metric-val">97%</div>
+                <div class="dash-metric-label">Answer Rate</div>
+              </div>
+              <div class="dash-metric">
+                <div class="dash-metric-val">4.2min</div>
+                <div class="dash-metric-label">Avg. Quote</div>
+              </div>
+            </div>
+            <div class="job-list">
+              <div class="job-row urgent">
+                <div class="job-type-icon ac">❄️</div>
+                <div class="job-info">
+                  <div class="job-name">Jennifer K. — Westlake Village</div>
+                  <div class="job-detail">AC not cooling, 90°F inside — emergency</div>
+                </div>
+                <div class="job-tag urgent">Urgent</div>
+              </div>
+              <div class="job-row">
+                <div class="job-type-icon heat">🔥</div>
+                <div class="job-info">
+                  <div class="job-name">Tom B. — Thousand Oaks</div>
+                  <div class="job-detail">Heater tune-up, scheduled tomorrow 10am</div>
+                </div>
+                <div class="job-tag scheduled">Scheduled</div>
+              </div>
+              <div class="job-row">
+                <div class="job-type-icon maint">🔧</div>
+                <div class="job-info">
+                  <div class="job-name">Maria G. — Newbury Park</div>
+                  <div class="job-detail">Annual maintenance plan — quoted via AI</div>
+                </div>
+                <div class="job-tag quoted">Quoted ✓</div>
+              </div>
+            </div>
+            <div class="ai-status-bar">
+              <div class="ai-status-icon">🤖</div>
+              <div class="ai-status-text">AI recovered 3 missed calls today — 2 booked, 1 quote sent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-lbl">AI Call Coverage</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+49%</div>
+        <div class="stat-lbl">More Booked Jobs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">97%</div>
+        <div class="stat-lbl">Call Answer Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3.5x</div>
+        <div class="stat-lbl">ROI for HVAC Cos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-wrap">
+      <div class="how-header">
+        <div class="section-tag">Simple Setup</div>
+        <h2 class="section-h2">Set it up once. Let AI handle the rest.</h2>
+        <p class="section-p">Pacific Air's AI system runs in the background — answering calls, booking jobs, and following up with leads automatically while your techs focus on the work.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-icon">📞</div>
+          <div class="step-title">Every call gets answered</div>
+          <div class="step-desc">Your AI agent picks up in under 4 seconds, 24/7, with Pacific Air's name and tone. No voicemail, no hold music.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-icon">💬</div>
+          <div class="step-title">AI qualifies the job</div>
+          <div class="step-desc">Collects job type, location, urgency, and contact info — all the details your dispatcher needs, captured perfectly.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-icon">📋</div>
+          <div class="step-title">Quote sent in 2 minutes</div>
+          <div class="step-desc">Branded Pacific Air quote delivered via SMS before the caller even hangs up. One tap to approve and schedule.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">4</div>
+          <div class="step-icon">✅</div>
+          <div class="step-title">Job lands on your board</div>
+          <div class="step-desc">Appointment booked, tech notified, customer confirmation sent — all automatic. Zero manual entry.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Voice Section -->
+  <section class="ai-section" id="ai-voice">
+    <div class="section-wrap">
+      <div class="ai-grid">
+        <div>
+          <div class="section-tag">AI Voice Agent</div>
+          <h2 class="section-h2">Pacific Air never misses a call — even at midnight.</h2>
+          <p class="section-p">Whether it's an AC emergency at 11 PM or a maintenance request on a Sunday, Pacific Air's AI voice agent handles it with the same warmth and professionalism as your best dispatcher.</p>
+          <div class="ai-features-list">
+            <div class="ai-feat">
+              <div class="ai-feat-icon">❄️</div>
+              <div>
+                <div class="ai-feat-title">Emergency AC & Heating Dispatch</div>
+                <div class="ai-feat-desc">AI triages HVAC emergencies immediately — identifies if a customer needs urgent dispatch and notifies your on-call tech in real time.</div>
+              </div>
+            </div>
+            <div class="ai-feat">
+              <div class="ai-feat-icon">📅</div>
+              <div>
+                <div class="ai-feat-title">Smart AI Scheduling</div>
+                <div class="ai-feat-desc">Customers pick from real available slots. AI slots them into your dispatch board automatically — no double-booking, no back-and-forth.</div>
+              </div>
+            </div>
+            <div class="ai-feat">
+              <div class="ai-feat-icon">🔔</div>
+              <div>
+                <div class="ai-feat-title">Maintenance Plan Follow-Up</div>
+                <div class="ai-feat-desc">AI reaches out to past customers with seasonal maintenance reminders, converting one-time jobs into recurring annual plans.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ai-card">
+            <div class="ai-card-title">🎙️ AI Voice — Live Sample</div>
+            <div class="voice-bars">
+              <div class="vbar" style="animation-delay:0s"></div>
+              <div class="vbar" style="animation-delay:0.08s"></div>
+              <div class="vbar" style="animation-delay:0.16s"></div>
+              <div class="vbar" style="animation-delay:0.24s"></div>
+              <div class="vbar" style="animation-delay:0.32s"></div>
+              <div class="vbar" style="animation-delay:0.4s"></div>
+              <div class="vbar" style="animation-delay:0.48s"></div>
+              <div class="vbar" style="animation-delay:0.56s"></div>
+              <div class="vbar" style="animation-delay:0.64s"></div>
+              <div class="vbar" style="animation-delay:0.72s"></div>
+            </div>
+            <div class="transcript-block">
+              <div class="transcript-line">
+                <span class="transcript-speaker ai">AI</span>
+                <span class="transcript-text">"Thank you for calling Pacific Air Solutions in Thousand Oaks — this is Aria. Is this an HVAC emergency, or are you looking to schedule service?"</span>
+              </div>
+              <div class="transcript-line">
+                <span class="transcript-speaker caller">Caller</span>
+                <span class="transcript-text">"My AC stopped working and it's 95 degrees out, I need someone today."</span>
+              </div>
+              <div class="transcript-line">
+                <span class="transcript-speaker ai">AI</span>
+                <span class="transcript-text">"Absolutely — I'm flagging this as an emergency right now. We have a tech available in your area and can have someone at your home within the hour. What's your address?"</span>
+              </div>
+            </div>
+            <div class="ai-metrics-grid">
+              <div class="ai-metric">
+                <div class="ai-metric-val">&lt;4s</div>
+                <div class="ai-metric-lbl">Answer Time</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-val">100%</div>
+                <div class="ai-metric-lbl">After-Hours</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-val">89%</div>
+                <div class="ai-metric-lbl">Calls → Booked</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-val">$0</div>
+                <div class="ai-metric-lbl">Missed Cost</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services-section" id="services">
+    <div class="section-wrap">
+      <div class="services-hdr">
+        <div class="section-tag">Our Services</div>
+        <h2 class="section-h2">Full HVAC coverage,<br />AI-managed from first call to invoice.</h2>
+        <p class="section-p">From emergency repairs to annual maintenance plans — Pacific Air handles every HVAC need in the Conejo Valley, with AI making sure no customer ever slips through the cracks.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card">
+          <span class="svc-icon">🆘</span>
+          <div class="svc-title">Emergency AC Repair</div>
+          <div class="svc-desc">System down in summer heat? We dispatch within the hour. AI handles the intake and gets a tech rolling before you even hang up.</div>
+          <div class="svc-badge">24/7 Emergency</div>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">❄️</span>
+          <div class="svc-title">AC Installation & Replacement</div>
+          <div class="svc-desc">New construction or system upgrade — our AI pre-qualifies your job, sends a quote, and schedules your install seamlessly.</div>
+          <div class="svc-badge">Instant Quotes</div>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">🔥</span>
+          <div class="svc-title">Heating & Furnace</div>
+          <div class="svc-desc">Furnace repairs, heat pump service, and full heating replacements for Thousand Oaks winters. AI-scheduled, zero hassle.</div>
+          <div class="svc-badge">Same-Day Available</div>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">🛡️</span>
+          <div class="svc-title">Maintenance Plans</div>
+          <div class="svc-desc">Annual tune-ups for AC and heating. AI auto-schedules your seasonal visits and sends reminders — you never have to think about it.</div>
+          <div class="svc-badge">AI Auto-Scheduled</div>
+        </div>
+        <div class="svc-card">
+          <span class="svc-icon">🌬️</span>
+          <div class="svc-title">Air Quality & Duct Work</div>
+          <div class="svc-desc">Duct cleaning, air purifiers, filtration systems. AI follows up with past customers who are due for filter replacements and IAQ checks.</div>
+          <div class="svc-badge">Smart Follow-Up</div>
+        </div>
+        <div class="svc-card" style="background:linear-gradient(135deg,var(--blue-soft),var(--sky-soft));border-color:var(--blue-mid);">
+          <span class="svc-icon">🤖</span>
+          <div class="svc-title">AI-Powered Operations</div>
+          <div class="svc-desc">Every service is AI-backed — from first call to final invoice. Reviews auto-requested, leads auto-followed-up, your reputation auto-built.</div>
+          <div class="svc-badge" style="background:var(--blue);color:white;border-color:var(--blue);">BEQPROD AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Never Miss / Lose Leads -->
+  <section class="lose-leads" id="never-miss">
+    <div class="lose-leads-inner">
+      <div class="lose-text">
+        <div class="section-tag">Stop Losing Leads Tonight</div>
+        <h2 class="section-h2">Every missed HVAC call is a $750 job that went to your competitor.</h2>
+        <p class="section-p">HVAC companies in the Conejo Valley miss an average of 11 calls per week. At $750 average ticket value, that's nearly $6,000 in lost revenue — every single week. Pacific Air stops the bleed tonight.</p>
+        <div class="lose-metrics">
+          <div class="lose-metric">
+            <div class="lose-metric-val">11</div>
+            <div class="lose-metric-lbl">Avg. missed calls/week for HVAC</div>
+          </div>
+          <div class="lose-metric">
+            <div class="lose-metric-val">$6K+</div>
+            <div class="lose-metric-lbl">Revenue lost to missed calls/week</div>
+          </div>
+          <div class="lose-metric">
+            <div class="lose-metric-val">72%</div>
+            <div class="lose-metric-lbl">Won't leave voicemail</div>
+          </div>
+          <div class="lose-metric">
+            <div class="lose-metric-val">63%</div>
+            <div class="lose-metric-lbl">Book with next company within 5 min</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">How Pacific Air Captures Every Lead</div>
+        <div class="lose-flow">
+          <div class="flow-item">
+            <div class="flow-step-num">1</div>
+            <div>
+              <div class="flow-title">Call answered by AI in 3 seconds, 24/7</div>
+              <div class="flow-desc">No voicemail, no hold music. "Pacific Air Solutions, this is Aria — how can I help?"</div>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div class="flow-step-num">2</div>
+            <div>
+              <div class="flow-title">Job details collected & priority assigned</div>
+              <div class="flow-desc">AI identifies emergency vs. standard, captures address, issue type, and availability.</div>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div class="flow-step-num">3</div>
+            <div>
+              <div class="flow-title">Quote sent via SMS in under 2 minutes</div>
+              <div class="flow-desc">Branded estimate hits their phone. One tap to book — no friction, no back-and-forth.</div>
+            </div>
+          </div>
+          <div class="flow-item">
+            <div class="flow-step-num">4</div>
+            <div>
+              <div class="flow-title">Appointment on the board, review requested after</div>
+              <div class="flow-desc">Tech dispatched, job tracked, 5-star review automatically requested 2 hours after completion.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-wrap">
+      <div class="testi-hdr">
+        <div class="section-tag">Customer Reviews</div>
+        <h2 class="section-h2">Thousand Oaks trusts Pacific Air.</h2>
+        <p class="section-p">Real customers, real feedback — from Westlake Village to Newbury Park. 5 stars on Google, 89 reviews and growing.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+          <p class="t-quote">"My AC went out at 9 PM in August. Called Pacific Air expecting voicemail — instead a real-sounding person answered immediately, had someone at my house by 10:30, and the whole thing was fixed by midnight. Absolute lifesavers."</p>
+          <div class="t-author">
+            <div class="t-avatar">JK</div>
+            <div>
+              <div class="t-name">Jennifer K.</div>
+              <div class="t-loc">Westlake Village · Emergency AC Repair</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+          <p class="t-quote">"Got a text quote within 2 minutes of calling. Approved it from my phone, picked a time slot, and that was it. The tech showed up exactly on time. I've never had a home service experience this easy — and I've lived in T.O. for 20 years."</p>
+          <div class="t-author">
+            <div class="t-avatar">TM</div>
+            <div>
+              <div class="t-name">Tom M.</div>
+              <div class="t-loc">Thousand Oaks · Annual Maintenance Plan</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="t-stars">
+            <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
+          </div>
+          <p class="t-quote">"I signed up for their maintenance plan after seeing how professional their AI handled my initial call. It's been 8 months and they've already reached out twice with reminders, sent a tech both times on schedule. Zero effort on my end. Worth every penny."</p>
+          <div class="t-author">
+            <div class="t-avatar">MG</div>
+            <div>
+              <div class="t-name">Maria G.</div>
+              <div class="t-loc">Newbury Park · Maintenance Plan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-wrap">
+      <div class="pricing-hdr">
+        <div class="section-tag">Transparent Pricing</div>
+        <h2 class="section-h2">Flat monthly rate. Massive ROI.</h2>
+        <p class="section-p">No per-call fees, no hidden charges. One flat monthly investment that pays for itself in the first week. Every plan includes full AI voice coverage.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">Starter</div>
+          <div class="price-name">Essentials</div>
+          <div class="price-val"><sup>$</sup>497<span>/mo</span></div>
+          <div class="price-tagline">Everything to get started with AI</div>
+          <ul class="price-features">
+            <li>AI Voice Agent (24/7)</li>
+            <li>Missed Call Recovery</li>
+            <li>SMS Lead Follow-Up</li>
+            <li>500 AI-handled minutes/mo</li>
+            <li>Basic CRM setup</li>
+          </ul>
+          <a href="#cta" class="price-btn outline">Get Started</a>
+        </div>
+        <div class="price-card popular">
+          <div class="price-tier">⚡ Most Popular</div>
+          <div class="price-name">Growth</div>
+          <div class="price-val"><sup>$</sup>797<span>/mo</span></div>
+          <div class="price-tagline">Built for Pacific Air's growth goals</div>
+          <ul class="price-features">
+            <li>Everything in Essentials</li>
+            <li>Instant Quote Automation</li>
+            <li>AI Scheduling Integration</li>
+            <li>Unlimited AI minutes</li>
+            <li>Maintenance Plan Follow-Up</li>
+            <li>Review Request Automation</li>
+          </ul>
+          <a href="#cta" class="price-btn primary">Book Free Demo</a>
+        </div>
+        <div class="price-card">
+          <div class="price-tier">Full Service</div>
+          <div class="price-name">Elite</div>
+          <div class="price-val"><sup>$</sup>1,297<span>/mo</span></div>
+          <div class="price-tagline">Complete AI operations partner</div>
+          <ul class="price-features">
+            <li>Everything in Growth</li>
+            <li>Custom AI voice persona</li>
+            <li>Multi-line management</li>
+            <li>Full GHL CRM build-out</li>
+            <li>Weekly strategy calls</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#cta" class="price-btn outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-wrap" id="cta">
+    <div class="section-wrap">
+      <div class="cta-block">
+        <div class="cta-tag">🎯 Limited Spots — Conejo Valley</div>
+        <h2 class="cta-h2">Stop Losing Leads Tonight.<br /><span>Pacific Air Deserves Better.</span></h2>
+        <p class="cta-desc">Book a 20-minute demo. We'll show you exactly how many calls Pacific Air is missing and what the AI does differently — live, on your real business data.</p>
+        <div class="cta-btns">
+          <a href="#" class="btn-blue" style="font-size:16px;padding:15px 30px;">📅 Book Your Free Demo Now</a>
+          <a href="tel:+18055550300" class="btn-outline" style="font-size:16px;padding:15px 30px;">📞 Call BEQPROD</a>
+        </div>
+        <div class="cta-trust-row">
+          <div class="cta-trust-item"><span class="check-blue">✓</span> No contracts, cancel anytime</div>
+          <div class="cta-trust-item"><span class="check-blue">✓</span> Live in 48 hours</div>
+          <div class="cta-trust-item"><span class="check-blue">✓</span> 30-day money-back guarantee</div>
+          <div class="cta-trust-item"><span class="check-blue">✓</span> Built for Pacific Air specifically</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="trust-section">
+    <div class="trust-row">
+      <div class="trust-badge">
+        <div class="trust-badge-icon">🏅</div>
+        <div class="trust-badge-text">CA Licensed<br/>& Insured</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">⭐</div>
+        <div class="trust-badge-text">5.0★ Google<br/>89 Reviews</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">🛡️</div>
+        <div class="trust-badge-text">SOC 2<br/>AI Platform</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">⚡</div>
+        <div class="trust-badge-text">24/7 Emergency<br/>Response</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">🤝</div>
+        <div class="trust-badge-text">BBB A+<br/>Rated</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">🔒</div>
+        <div class="trust-badge-text">Secure<br/>Data Handling</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-mark">❄️</div>
+        <div class="footer-logo-text">Pacific Air Solutions · Powered by BEQPROD AI</div>
+      </div>
+      <ul class="footer-nav">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#cta">Demo</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 Pacific Air Solutions · Thousand Oaks, CA · (805) 555-0200</div>
+    </div>
+  </footer>
+
+  <!-- GHL Chat Widget -->
+  <div class="ghl-chat">
+    <div class="ghl-popup" id="ghlPopup">
+      <div class="ghl-popup-header">
+        <div class="ghl-avatar">❄️</div>
+        <div class="ghl-header-info">
+          <div class="ghl-header-name">Pacific Air AI</div>
+          <div class="ghl-header-status"><div class="ghl-online-dot"></div> Online now</div>
+        </div>
+        <div class="ghl-powered">⚡ GHL</div>
+      </div>
+      <div class="ghl-messages" id="ghlMessages">
+        <div class="ghl-msg ai">Hi! I'm Pacific Air's AI assistant. Need help with your AC or heating? I can get you a quote right now. 👋</div>
+      </div>
+      <div class="ghl-quick-replies">
+        <div class="ghl-qr" onclick="ghlQuickReply('AC Emergency')">🆘 AC Emergency</div>
+        <div class="ghl-qr" onclick="ghlQuickReply('Request a Quote')">📋 Get a Quote</div>
+        <div class="ghl-qr" onclick="ghlQuickReply('Schedule Maintenance')">📅 Schedule Service</div>
+      </div>
+      <div class="ghl-input-area">
+        <input class="ghl-input" id="ghlInput" type="text" placeholder="Type your message..." />
+        <button class="ghl-send" onclick="sendGhlMessage()">➤</button>
+      </div>
+      <div class="ghl-footer-bar">Powered by GoHighLevel · Pacific Air Solutions</div>
+    </div>
+    <button class="ghl-chat-btn" onclick="toggleGhlChat()">
+      💬
+      <div class="ghl-notif">1</div>
+    </button>
+  </div>
+
+  <script>
+    function toggleGhlChat() {
+      const popup = document.getElementById('ghlPopup');
+      popup.classList.toggle('open');
+      document.querySelector('.ghl-notif').style.display = 'none';
+    }
+
+    function ghlQuickReply(text) {
+      const input = document.getElementById('ghlInput');
+      input.value = text;
+      sendGhlMessage();
+    }
+
+    function sendGhlMessage() {
+      const input = document.getElementById('ghlInput');
+      const messages = document.getElementById('ghlMessages');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'ghl-msg user';
+      userMsg.textContent = text;
+      messages.appendChild(userMsg);
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'ghl-msg ai';
+        const lc = text.toLowerCase();
+        if (lc.includes('emergency') || lc.includes('ac')) {
+          aiMsg.textContent = "I'm flagging this as urgent! 🚨 We have a tech available in Thousand Oaks. Can I get your address and confirm — is the AC completely down or blowing warm air?";
+        } else if (lc.includes('quote') || lc.includes('price')) {
+          aiMsg.textContent = "I can send you a quote right now! What type of system do you have and what's the issue you're experiencing? I'll have an estimate to you in under 2 minutes.";
+        } else if (lc.includes('schedule') || lc.includes('mainten')) {
+          aiMsg.textContent = "We have openings this week! What city are you in — Thousand Oaks, Westlake Village, or Newbury Park? I'll pull up available slots for you.";
+        } else {
+          aiMsg.textContent = "Got it! Let me connect you with the right information. What's your location in the Conejo Valley and what HVAC issue can I help you with today?";
+        }
+        messages.appendChild(aiMsg);
+        messages.scrollTop = messages.scrollHeight;
+      }, 800);
+    }
+
+    document.getElementById('ghlInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendGhlMessage();
+    });
+  </script>
+</body>
+</html>

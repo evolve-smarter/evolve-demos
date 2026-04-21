@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Roofing Contractors | Thousand Oaks, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal: #1e1e1e;
+      --charcoal-mid: #2d2d2d;
+      --charcoal-light: #3d3d3d;
+      --orange: #e85d04;
+      --orange-light: #f48c06;
+      --orange-pale: #fff3e0;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-200: #e0e0e0;
+      --gray-600: #757575;
+      --text: #1a1a1a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--charcoal);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; background: var(--orange);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-logo-text { color: var(--white); font-weight: 800; font-size: 1.05rem; line-height: 1.2; }
+    .nav-logo-text span { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: var(--white); font-weight: 700; font-size: 0.9rem;
+      padding: 10px 22px; border-radius: 6px; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange-light); }
+    .nav-phone { color: var(--white); font-weight: 600; font-size: 0.95rem; text-decoration: none; margin-right: 18px; }
+    .nav-phone:hover { color: var(--orange-light); }
+    .nav-right { display: flex; align-items: center; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-mid) 60%, #2a1a00 100%);
+      color: var(--white); padding: 90px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0; bottom: 0; left: 50%;
+      background: linear-gradient(135deg, transparent, rgba(232,93,4,0.12));
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,93,4,0.2); border: 1px solid rgba(232,93,4,0.4);
+      color: var(--orange-light); font-size: 0.82rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 22px; letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.1;
+      max-width: 680px; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.78); max-width: 560px;
+      line-height: 1.7; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: var(--white); font-weight: 700; font-size: 1rem;
+      padding: 15px 32px; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.35); color: var(--white); font-weight: 600; font-size: 1rem;
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--orange); background: rgba(232,93,4,0.1); }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap;
+    }
+    .hero-stat { }
+    .hero-stat-num { font-size: 2rem; font-weight: 900; color: var(--orange); }
+    .hero-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); font-weight: 500; margin-top: 2px; }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--orange); padding: 14px 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .trust-item { color: var(--white); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
+    .trust-item svg { width: 18px; height: 18px; fill: var(--white); }
+
+    /* SERVICES */
+    .services { padding: 80px 5%; background: var(--gray-100); }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; color: var(--orange); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--charcoal);
+      margin-bottom: 14px; line-height: 1.2;
+    }
+    .section-sub { color: var(--gray-600); font-size: 1.05rem; max-width: 540px; line-height: 1.65; margin-bottom: 50px; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;
+    }
+    .service-card {
+      background: var(--white); border-radius: 12px; padding: 30px 26px;
+      border: 1px solid var(--gray-200); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .service-icon {
+      width: 52px; height: 52px; background: var(--orange-pale); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px;
+    }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; }
+    .service-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+
+    /* WHY US */
+    .why-us { padding: 80px 5%; background: var(--white); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .why-content { }
+    .why-points { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .why-point { display: flex; gap: 16px; align-items: flex-start; }
+    .why-point-icon {
+      width: 44px; height: 44px; min-width: 44px; background: var(--orange);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--white);
+    }
+    .why-point h4 { font-size: 1rem; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+    .why-point p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.55; }
+    .why-visual {
+      background: linear-gradient(135deg, var(--charcoal), var(--charcoal-mid));
+      border-radius: 16px; padding: 40px 36px; color: var(--white);
+    }
+    .rating-display { text-align: center; padding: 28px; border-radius: 12px; background: rgba(232,93,4,0.15); border: 1px solid rgba(232,93,4,0.3); margin-bottom: 24px; }
+    .rating-num { font-size: 4rem; font-weight: 900; color: var(--orange); line-height: 1; }
+    .rating-stars { font-size: 1.8rem; color: var(--orange); margin: 8px 0; }
+    .rating-count { font-size: 0.88rem; color: rgba(255,255,255,0.6); }
+    .review-item { padding: 16px; background: rgba(255,255,255,0.07); border-radius: 8px; margin-bottom: 12px; }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-stars { color: var(--orange); font-size: 0.88rem; margin-bottom: 6px; }
+    .review-text { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.5; font-style: italic; }
+    .review-author { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 6px; font-weight: 600; }
+
+    /* PROCESS */
+    .process { padding: 80px 5%; background: var(--charcoal); color: var(--white); }
+    .process .section-title { color: var(--white); }
+    .process .section-sub { color: rgba(255,255,255,0.6); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 48px; }
+    .process-step { padding: 32px 24px; text-align: center; position: relative; }
+    .process-step::after {
+      content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.5rem; color: var(--orange); font-weight: 700;
+    }
+    .process-step:last-child::after { display: none; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 900; color: var(--white);
+      margin: 0 auto 16px;
+    }
+    .process-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .process-step p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 80px 5%; background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      text-align: center; color: var(--white);
+    }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 16px; }
+    .cta-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--orange); font-weight: 800; font-size: 1.6rem;
+      padding: 16px 40px; border-radius: 10px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    }
+    .cta-phone:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+    .cta-note { font-size: 0.88rem; opacity: 0.8; margin-top: 16px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal); color: rgba(255,255,255,0.5);
+      padding: 40px 5%; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .footer-brand { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .footer-brand span { color: var(--orange); }
+    .footer-info { font-size: 0.85rem; line-height: 1.7; }
+    .footer-credit { font-size: 0.75rem; text-align: right; }
+    .footer-credit a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-credit a:hover { color: var(--orange); }
+
+    /* CHAT WIDGET */
+    .chat-widget {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    }
+    .chat-btn {
+      width: 58px; height: 58px; background: var(--orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(232,93,4,0.4);
+      transition: transform 0.2s, box-shadow 0.2s; font-size: 24px;
+      border: none; color: var(--white);
+    }
+    .chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(232,93,4,0.5); }
+    .chat-popup {
+      position: absolute; bottom: 70px; right: 0; width: 300px;
+      background: var(--white); border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18); display: none;
+      border: 1px solid var(--gray-200); overflow: hidden;
+    }
+    .chat-popup.open { display: block; }
+    .chat-header { background: var(--charcoal); padding: 16px 18px; }
+    .chat-header h4 { color: var(--white); font-size: 0.95rem; font-weight: 700; }
+    .chat-header p { color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 2px; }
+    .chat-body { padding: 16px 18px; }
+    .chat-body p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 14px; }
+    .chat-body a {
+      display: block; background: var(--orange); color: var(--white); text-align: center;
+      padding: 11px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .process-step::after { display: none; }
+      .process-steps { gap: 8px; }
+      nav { padding: 0 4%; }
+      .nav-phone { display: none; }
+      .hero { padding: 60px 4% 60px; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🏠</div>
+    <div class="nav-logo-text">Top Roofing<br><span>Contractors</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="tel:8055058002" class="nav-phone">📞 (805) 505-8002</a>
+    <a href="tel:8055058002" class="nav-cta">Free Estimate</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⭐ 4.8 Stars · 82 Google Reviews · Thousand Oaks, CA</div>
+  <h1>Thousand Oaks' Most<br><span>Trusted Roofing</span><br>Contractors</h1>
+  <p>From emergency repairs to full roof replacements, Top Roofing Contractors delivers expert craftsmanship with a lifetime of experience serving Ventura County homeowners.</p>
+  <div class="hero-actions">
+    <a href="tel:8055058002" class="btn-primary">📞 Call Now — 24/7</a>
+    <a href="#services" class="btn-outline">Our Services</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.8★</div>
+      <div class="hero-stat-label">Google Rating</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">82</div>
+      <div class="hero-stat-label">Verified Reviews</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">Emergency Service</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">20+</div>
+      <div class="hero-stat-label">Years Experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">✓ Licensed & Insured</div>
+  <div class="trust-item">✓ Free Estimates</div>
+  <div class="trust-item">✓ Emergency Repairs Available</div>
+  <div class="trust-item">✓ Ventura County Trusted</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Complete Roofing Services</div>
+  <div class="section-sub">We handle every aspect of your roof — from minor repairs to complete replacements — using top-quality materials built for Southern California weather.</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Roof Repair</h3>
+      <p>Leaks, missing shingles, storm damage — we diagnose and fix roofing problems fast, preventing small issues from becoming major expenses.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Roof Replacement</h3>
+      <p>Full residential and commercial roof replacements. We help you choose the right material — asphalt, tile, flat — for your home and budget.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>Roof Inspections</h3>
+      <p>Pre-sale inspections, insurance assessments, and routine checkups. Know the true condition of your roof with a detailed written report.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌧️</div>
+      <h3>Leak Detection</h3>
+      <p>We track down even the most elusive leaks with precision tools and decades of hands-on experience — then fix them for good.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪟</div>
+      <h3>Skylights & Flashing</h3>
+      <p>Skylight installation and replacement, plus proper flashing around chimneys, vents, and valleys to keep water out.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Emergency Service</h3>
+      <p>Storm damage, fallen branches, sudden leaks — we're available 24/7 because roofing emergencies don't wait for business hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="reviews">
+  <div class="why-grid">
+    <div class="why-content">
+      <div class="section-label">Why Choose Us</div>
+      <div class="section-title">The Roofing Crew Thousand Oaks Relies On</div>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">🏆</div>
+          <div>
+            <h4>Top-Rated in Ventura County</h4>
+            <p>Consistently rated 4.8 stars across 82 genuine Google reviews. Our reputation is built job by job, homeowner by homeowner.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">📋</div>
+          <div>
+            <h4>Transparent Pricing</h4>
+            <p>Free detailed estimates with no hidden fees. We explain everything upfront so you can make informed decisions.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🔒</div>
+          <div>
+            <h4>Fully Licensed & Insured</h4>
+            <p>Properly licensed California roofing contractor with full liability and workers' comp insurance for your protection.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">⏱️</div>
+          <div>
+            <h4>On Time, Every Time</h4>
+            <p>We respect your schedule. Crews arrive when promised, complete work on time, and clean up completely when done.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="rating-display">
+        <div class="rating-num">4.8</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">Based on 82 Google Reviews</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Top Roofing did an amazing job on our entire roof replacement. They were professional, efficient, and the price was very fair. Highly recommend!"</div>
+        <div class="review-author">— Sandra M., Thousand Oaks</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Called them after a bad storm left us with a leaking roof. They were out within hours and had it fixed the same day. Lifesavers!"</div>
+        <div class="review-author">— Mike T., Westlake Village</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Great craftsmanship, honest about what needed to be done, and didn't oversell me. The roof looks brand new."</div>
+        <div class="review-author">— Karen R., Newbury Park</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Simple 4-Step Process</div>
+  <div class="section-sub">From first call to finished roof, we make the process easy and transparent at every step.</div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <h4>Free Estimate</h4>
+      <p>Call or request online. We schedule a free on-site assessment at your convenience.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <h4>Detailed Proposal</h4>
+      <p>You receive a clear, written proposal with scope of work and pricing. No surprises.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <h4>Expert Installation</h4>
+      <p>Our experienced crew completes the job efficiently, with quality materials and clean work.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <h4>Final Walkthrough</h4>
+      <p>We inspect the finished work with you and ensure your complete satisfaction before we leave.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Fix Your Roof?</h2>
+  <p>Call us now for a free estimate. We're available 24 hours a day, 7 days a week — including weekends and holidays.</p>
+  <a href="tel:8055058002" class="cta-phone">📞 (805) 505-8002</a>
+  <div class="cta-note">Free Estimates · Licensed & Insured · Serving Ventura County</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Top Roofing <span>Contractors</span></div>
+    <div class="footer-info" style="margin-top:8px;">
+      1982 McCrea Rd, Thousand Oaks, CA 93360<br>
+      <a href="tel:8055058002" style="color:rgba(255,255,255,0.5);text-decoration:none;">(805) 505-8002</a> · Open 24 Hours
+    </div>
+  </div>
+  <div class="footer-credit">
+    <div>© 2025 Top Roofing Contractors. All rights reserved.</div>
+    <div style="margin-top:6px;"><a href="tel:8053720416">Site by Evolve Home Services | (805) 372-0416</a></div>
+  </div>
+</footer>
+
+<!-- CHAT WIDGET -->
+<div class="chat-widget">
+  <div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+      <h4>🏠 Top Roofing Contractors</h4>
+      <p>We typically reply instantly</p>
+    </div>
+    <div class="chat-body">
+      <p>Have a roofing question or need a quick estimate? Give us a call — we're available 24/7!</p>
+      <a href="tel:8055058002">Call (805) 505-8002</a>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="document.getElementById('chatPopup').classList.toggle('open')" aria-label="Chat">💬</button>
+</div>
+
+</body>
+</html>

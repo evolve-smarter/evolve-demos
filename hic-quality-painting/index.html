@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIC Quality Painting — Interior & Exterior Painters | Ventura County</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0a12;--bg2:#1a1220;--text:#f3ecef;--muted:#8a7a88;--accent:#E84D62;--accent2:#FF7A8A;--gold:#D4AF37;--border:#2a1f2e}
+html,body{background:var(--bg);color:var(--text);font-family:'Outfit',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* Paint stroke gradient background */
+.bg-wash{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.bg-wash::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:var(--accent);opacity:.12;filter:blur(120px);top:-200px;right:-150px;animation:drift 25s ease-in-out infinite}
+.bg-wash::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:var(--gold);opacity:.08;filter:blur(100px);bottom:-100px;left:-100px;animation:drift 30s ease-in-out infinite reverse}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,10,18,.75);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-cta{background:var(--accent);color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:14px;transition:all .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px var(--accent)}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px 40px;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(232,77,98,.1);border:1px solid rgba(232,77,98,.3);border-radius:100px;font-size:13px;color:var(--accent2);font-weight:600;margin-bottom:32px}
+.hero h1{font-size:clamp(44px,8vw,96px);font-weight:800;line-height:.95;letter-spacing:-.04em;max-width:1000px;margin-bottom:24px}
+.hero h1 .stroke{font-style:italic;background:linear-gradient(90deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:600px;line-height:1.6;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--accent);color:#fff;padding:18px 36px;border-radius:12px;font-weight:700;font-size:16px;text-decoration:none;transition:all .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 40px -10px var(--accent)}
+.btn-secondary{background:transparent;color:var(--text);padding:18px 36px;border-radius:12px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid var(--border);transition:all .2s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+.section{padding:120px 24px;max-width:1200px;margin:0 auto}
+.section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;font-weight:700}
+.section h2{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.1;max-width:800px;margin-bottom:24px}
+.lede{font-size:18px;color:var(--muted);max-width:600px;line-height:1.6;margin-bottom:60px}
+
+.spot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border);border-radius:20px;overflow:hidden}
+.spot-card{background:var(--bg2);padding:40px 28px;position:relative;overflow:hidden}
+.spot-card::before{content:'';position:absolute;inset:-1px;background:radial-gradient(circle 200px at var(--mx,50%) var(--my,50%),rgba(232,77,98,.18),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
+.spot-card:hover::before{opacity:1}
+.spot-card .icon{font-size:32px;margin-bottom:20px;display:block}
+.spot-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.spot-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.review-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;transition:all .3s}
+.review-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.review-stars{color:var(--gold);font-size:18px;margin-bottom:12px;letter-spacing:2px}
+.review-text{font-size:15px;line-height:1.6;margin-bottom:16px}
+.review-author{font-size:13px;color:var(--muted)}
+
+.cta-section{padding:120px 24px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);border-top:1px solid var(--border)}
+.cta-inner{max-width:700px;margin:0 auto}
+.cta-section h2{font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:24px}
+.cta-phone{font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--accent);margin:32px 0;display:block;text-decoration:none;font-variant-numeric:tabular-nums}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+.built-by{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;margin-top:16px;background:var(--bg2);text-decoration:none;color:var(--muted);transition:all .2s}
+.built-by:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="bg-wash"></div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🎨</div>
+    <span>HIC Quality Painting</span>
+  </div>
+  <a href="tel:8050000000" class="nav-cta">📞 Get Free Quote</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">⭐ 5.0 Rating · 29 Verified Reviews</div>
+  <h1>Paint your home <span class="stroke">like it matters.</span></h1>
+  <p>Interior & exterior painting done right the first time. Clean lines, premium paint, professional prep, and a crew you'll actually want in your home.</p>
+  <div class="hero-actions">
+    <a href="tel:8050000000" class="btn-primary">Get a Free Quote</a>
+    <a href="#gallery" class="btn-secondary">See Our Work</a>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="section-label">Our Services</div>
+  <h2>Painting done the right way</h2>
+  <p class="lede">We don't cut corners on prep. That's why our paint jobs last years longer than the competition.</p>
+  <div class="spot-grid" id="spotGrid">
+    <div class="spot-card"><span class="icon">🏠</span><h3>Interior Painting</h3><p>Bedrooms, living rooms, kitchens, trim, ceilings. Premium paint, zero-VOC options available.</p></div>
+    <div class="spot-card"><span class="icon">🌴</span><h3>Exterior Painting</h3><p>Full home exteriors, stucco, siding, trim. Multi-coat system built for California sun.</p></div>
+    <div class="spot-card"><span class="icon">🪵</span><h3>Cabinet Refinishing</h3><p>Transform kitchen cabinets for a fraction of replacement. Professional spray finish.</p></div>
+    <div class="spot-card"><span class="icon">🏢</span><h3>Commercial</h3><p>Offices, retail, HOAs, and rental properties. Fast turnaround, minimal disruption.</p></div>
+    <div class="spot-card"><span class="icon">🖼️</span><h3>Accent Walls & Murals</h3><p>Feature walls, color-blocking, custom stencil work, and decorative finishes.</p></div>
+    <div class="spot-card"><span class="icon">🛡️</span><h3>Deck & Fence Staining</h3><p>Power-wash, sand, and seal to protect wood from sun, rain, and termites.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">What Homeowners Say</div>
+  <h2>29 five-star reviews. Every single one.</h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"HIC painted our entire interior — 4 bedrooms, 3 baths, kitchen, hallways. The crew was respectful, cleaned every night, and the lines are absolutely perfect. Worth every penny."</p>
+      <div class="review-author">— Verified Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I've hired painters before. These guys are different. They prep like pros — masking, patching, sanding. The paint looks like glass when they're done."</p>
+      <div class="review-author">— Verified Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Refinished our kitchen cabinets and they look BETTER than new. Saved us $20K vs replacement. Highly recommend."</p>
+      <div class="review-author">— Verified Google Review</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label">Free Quotes · Same-Week Scheduling</div>
+    <h2>Ready for a home you're proud of?</h2>
+    <a href="tel:8050000000" class="cta-phone">📞 Call for a Free Quote</a>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+      <a href="tel:8050000000" class="btn-primary">Call Now</a>
+      <a href="sms:8050000000" class="btn-secondary">Text Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 HIC Quality Painting · Ventura County, California</p>
+  <p style="margin-top:8px">Licensed · Bonded · Insured</p>
+  <a href="https://evolvesmarter.io" class="built-by">⚡ Site built by Evolve Smarter</a>
+</footer>
+
+<script>
+(function(){
+  var grid=document.getElementById('spotGrid');
+  grid.addEventListener('mousemove',function(e){
+    var cards=grid.querySelectorAll('.spot-card');
+    cards.forEach(function(c){
+      var r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      c.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  });
+})();
+</script>
+</body>
+</html>

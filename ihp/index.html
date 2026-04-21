@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IHP Plumbing | Thousand Oaks, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark-blue: #0b1f3a;
+      --dark-blue-mid: #112a4f;
+      --dark-blue-light: #1a3d6e;
+      --blue-accent: #1e6fbf;
+      --blue-bright: #3b8de0;
+      --blue-pale: #e8f3ff;
+      --white: #ffffff;
+      --off-white: #f7fafd;
+      --gray-border: #d9e5f0;
+      --gray-600: #5a7080;
+      --text: #0b1f3a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--dark-blue); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 5%; height: 68px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; background: var(--blue-bright);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .nav-logo-text { color: var(--white); font-weight: 900; font-size: 1.1rem; line-height: 1.2; }
+    .nav-logo-text span { color: var(--blue-bright); font-weight: 400; font-size: 0.78rem; display: block; }
+    .nav-cta {
+      background: var(--blue-bright); color: var(--white); font-weight: 700; font-size: 0.88rem;
+      padding: 10px 22px; border-radius: 6px; text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #5a9ee8; }
+    .nav-phone { color: rgba(255,255,255,0.85); font-weight: 600; font-size: 0.9rem; text-decoration: none; margin-right: 18px; }
+    .nav-phone:hover { color: var(--blue-bright); }
+    .nav-right { display: flex; align-items: center; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(150deg, var(--dark-blue) 0%, var(--dark-blue-mid) 50%, #0d2a50 100%);
+      color: var(--white); padding: 96px 5% 88px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; bottom: -60px; right: -60px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(59,141,224,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,141,224,0.15); border: 1px solid rgba(59,141,224,0.35);
+      color: #93c5fd; font-size: 0.82rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 3.3rem); font-weight: 900; line-height: 1.1;
+      max-width: 680px; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--blue-bright); }
+    .hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.73); max-width: 560px;
+      line-height: 1.72; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue-bright); color: var(--white); font-weight: 700; font-size: 1rem;
+      padding: 15px 32px; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #5a9ee8; transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.28); color: var(--white); font-weight: 600; font-size: 1rem;
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--blue-bright); background: rgba(59,141,224,0.12); }
+    .hero-stats { display: flex; gap: 44px; margin-top: 52px; flex-wrap: wrap; }
+    .hero-stat-num { font-size: 2rem; font-weight: 900; color: var(--blue-bright); }
+    .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.52); font-weight: 500; margin-top: 2px; }
+
+    /* STRIPE */
+    .stripe {
+      background: var(--blue-bright); padding: 14px 5%;
+      display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap;
+    }
+    .stripe-item { color: var(--white); font-weight: 700; font-size: 0.87rem; display: flex; align-items: center; gap: 8px; }
+
+    /* SERVICES */
+    .services { padding: 84px 5%; background: var(--off-white); }
+    .section-label {
+      font-size: 0.76rem; font-weight: 700; color: var(--blue-accent); letter-spacing: 1.8px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 800; color: var(--dark-blue); margin-bottom: 14px; }
+    .section-sub { color: var(--gray-600); font-size: 1rem; max-width: 540px; line-height: 1.7; margin-bottom: 50px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; }
+    .service-card {
+      background: var(--white); border-radius: 10px; padding: 30px 26px;
+      border: 1px solid var(--gray-border); border-left: 4px solid var(--blue-bright);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 28px rgba(11,31,58,0.1); transform: translateY(-3px); }
+    .service-icon {
+      width: 48px; height: 48px; background: var(--blue-pale); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 15px;
+    }
+    .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 8px; }
+    .service-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.62; }
+
+    /* WHY US */
+    .why-us { padding: 84px 5%; background: var(--white); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .why-points { margin-top: 32px; display: flex; flex-direction: column; gap: 22px; }
+    .why-point { display: flex; gap: 16px; align-items: flex-start; }
+    .why-point-icon {
+      width: 44px; height: 44px; min-width: 44px; background: var(--dark-blue-light);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .why-point h4 { font-size: 0.98rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 4px; }
+    .why-point p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.55; }
+    .review-panel {
+      background: linear-gradient(140deg, var(--dark-blue), var(--dark-blue-mid));
+      border-radius: 14px; padding: 38px 32px; color: var(--white);
+    }
+    .rating-display { text-align: center; padding: 26px; border-radius: 10px; background: rgba(59,141,224,0.12); border: 1px solid rgba(59,141,224,0.28); margin-bottom: 22px; }
+    .rating-num { font-size: 4rem; font-weight: 900; color: var(--blue-bright); line-height: 1; }
+    .rating-stars { font-size: 1.7rem; color: var(--blue-bright); margin: 8px 0; }
+    .rating-count { font-size: 0.85rem; color: rgba(255,255,255,0.52); }
+    .review-item { padding: 15px; background: rgba(255,255,255,0.06); border-radius: 8px; margin-bottom: 12px; }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-stars { color: var(--blue-bright); font-size: 0.85rem; margin-bottom: 6px; }
+    .review-text { font-size: 0.87rem; color: rgba(255,255,255,0.8); line-height: 1.55; font-style: italic; }
+    .review-author { font-size: 0.76rem; color: rgba(255,255,255,0.45); margin-top: 6px; font-weight: 600; }
+
+    /* COMMON PROBLEMS */
+    .problems { padding: 84px 5%; background: var(--dark-blue); color: var(--white); }
+    .problems .section-title { color: var(--white); }
+    .problems .section-sub { color: rgba(255,255,255,0.58); }
+    .problems-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; margin-top: 10px; }
+    .problem-card {
+      background: rgba(255,255,255,0.06); border-radius: 10px; padding: 24px 22px;
+      border: 1px solid rgba(59,141,224,0.18); display: flex; gap: 14px; align-items: flex-start;
+    }
+    .problem-icon { font-size: 1.6rem; min-width: 32px; }
+    .problem-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+    .problem-card p { font-size: 0.84rem; color: rgba(255,255,255,0.58); line-height: 1.5; }
+
+    /* CTA */
+    .cta-section {
+      padding: 84px 5%;
+      background: linear-gradient(135deg, var(--blue-bright) 0%, #5a9ee8 100%);
+      text-align: center; color: var(--white);
+    }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 14px; }
+    .cta-section p { font-size: 1.05rem; opacity: 0.88; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--dark-blue); color: var(--blue-bright); font-weight: 900; font-size: 1.5rem;
+      padding: 16px 40px; border-radius: 10px; text-decoration: none;
+      box-shadow: 0 6px 24px rgba(11,31,58,0.3); transition: transform 0.2s;
+    }
+    .cta-phone:hover { transform: translateY(-2px); }
+    .cta-hours { font-size: 0.86rem; margin-top: 16px; opacity: 0.82; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark-blue); color: rgba(255,255,255,0.45);
+      padding: 40px 5%; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand { color: var(--white); font-weight: 800; font-size: 1.05rem; }
+    .footer-brand span { color: var(--blue-bright); }
+    .footer-info { font-size: 0.84rem; line-height: 1.7; margin-top: 8px; }
+    .footer-credit { font-size: 0.75rem; text-align: right; }
+    .footer-credit a { color: rgba(255,255,255,0.3); text-decoration: none; }
+    .footer-credit a:hover { color: var(--blue-bright); }
+
+    /* CHAT */
+    .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 999; }
+    .chat-btn {
+      width: 58px; height: 58px; background: var(--blue-bright); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(59,141,224,0.45);
+      transition: transform 0.2s; font-size: 24px; border: none; color: var(--white);
+    }
+    .chat-btn:hover { transform: scale(1.08); }
+    .chat-popup {
+      position: absolute; bottom: 70px; right: 0; width: 300px;
+      background: var(--white); border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15); display: none;
+      border: 1px solid var(--gray-border); overflow: hidden;
+    }
+    .chat-popup.open { display: block; }
+    .chat-header { background: var(--dark-blue); padding: 16px 18px; }
+    .chat-header h4 { color: var(--white); font-size: 0.95rem; font-weight: 700; }
+    .chat-header p { color: rgba(255,255,255,0.5); font-size: 0.78rem; margin-top: 2px; }
+    .chat-body { padding: 16px 18px; }
+    .chat-body p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 14px; }
+    .chat-body a {
+      display: block; background: var(--blue-bright); color: var(--white); text-align: center;
+      padding: 11px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 4%; }
+      .nav-phone { display: none; }
+      .hero { padding: 60px 4%; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🔧</div>
+    <div class="nav-logo-text">IHP Plumbing<span>Thousand Oaks, CA</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="tel:8052976942" class="nav-phone">📞 (805) 297-6942</a>
+    <a href="tel:8052976942" class="nav-cta">Call Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⭐ 4.9 Stars · Thousand Oaks, CA · Licensed Plumber</div>
+  <h1>Expert <span>Plumbing</span><br>Service for<br>Thousand Oaks Homes</h1>
+  <p>IHP Plumbing delivers professional, reliable plumbing solutions throughout Ventura County. Highly rated by our customers, with a commitment to quality work done right the first time.</p>
+  <div class="hero-actions">
+    <a href="tel:8052976942" class="btn-primary">📞 (805) 297-6942</a>
+    <a href="#services" class="btn-outline">Our Services</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.9★</div>
+      <div class="hero-stat-label">Google Rating</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Licensed & Insured</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Fast</div>
+      <div class="hero-stat-label">Response Times</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">All</div>
+      <div class="hero-stat-label">Plumbing Jobs</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIPE -->
+<div class="stripe">
+  <div class="stripe-item">✓ Licensed & Insured</div>
+  <div class="stripe-item">✓ Free Estimates</div>
+  <div class="stripe-item">✓ Residential & Commercial</div>
+  <div class="stripe-item">✓ Mon–Fri 7AM–5PM</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Plumbing Services</div>
+  <div class="section-title">Full-Service Plumbing Solutions</div>
+  <div class="section-sub">From leaky faucets to whole-house repiping, IHP Plumbing handles every type of plumbing job for homes and businesses in Ventura County.</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💧</div>
+      <h3>Leak Detection & Repair</h3>
+      <p>Pinhole leaks, slab leaks, pipe bursts — we locate and repair leaks quickly before they cause serious water damage to your property.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚿</div>
+      <h3>Drain Cleaning</h3>
+      <p>Slow or clogged drains cleared fast. Kitchen sinks, showers, floor drains, and main line clogs — we get water flowing again.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔥</div>
+      <h3>Water Heater Service</h3>
+      <p>Repair and replacement of tank and tankless water heaters. No hot water? We'll have it back fast with reliable, lasting results.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Repiping</h3>
+      <p>Galvanized or copper pipe replacement for aging homes. We repipe efficiently with minimal disruption to your walls and daily life.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚽</div>
+      <h3>Toilet & Fixture Repair</h3>
+      <p>Running toilets, faulty faucets, slow drains — we repair and replace fixtures with quality parts for long-lasting performance.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔩</div>
+      <h3>Sewer Line Service</h3>
+      <p>Sewer inspections, hydro-jetting, and sewer line repair or replacement. We keep your waste lines flowing freely and cleanly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="reviews">
+  <div class="why-grid">
+    <div>
+      <div class="section-label">Why IHP?</div>
+      <div class="section-title">Your Local Thousand Oaks Plumber</div>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">⭐</div>
+          <div>
+            <h4>4.9-Star Google Rating</h4>
+            <p>Our customers consistently give us top marks for professionalism, quality work, and showing up when we say we will.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🔍</div>
+          <div>
+            <h4>Diagnose Before We Quote</h4>
+            <p>We find the real problem first, then give you an honest estimate. No guesswork, no unnecessary repairs billed to your job.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🏡</div>
+          <div>
+            <h4>Local & Accountable</h4>
+            <p>We live and work in this community. Our reputation depends on doing right by every single customer in Thousand Oaks and beyond.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">✅</div>
+          <div>
+            <h4>Work Guaranteed</h4>
+            <p>We stand behind every job we complete. If something isn't right, we'll make it right — no excuses, no runarounds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="review-panel">
+      <div class="rating-display">
+        <div class="rating-num">4.9</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">Based on 9 Google Reviews</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"IHP Plumbing found a slab leak under our kitchen that two other plumbers missed. Fixed it cleanly and the price was very fair. Extremely professional team."</div>
+        <div class="review-author">— Patricia H., Thousand Oaks</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Fast, clean, and reasonably priced. They replaced our water heater same week and cleaned up like they were never there. Will use for all future plumbing needs."</div>
+        <div class="review-author">— James K., Newbury Park</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Came out to clear a stubborn main line blockage. On time, explained everything, got it done in under an hour. Highly recommend IHP to anyone in the area."</div>
+        <div class="review-author">— Lisa M., Westlake Village</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMON PROBLEMS -->
+<section class="problems">
+  <div class="section-label" style="color:var(--blue-bright);">We Fix These Fast</div>
+  <div class="section-title">Common Plumbing Problems We Solve</div>
+  <div class="section-sub" style="margin-bottom:42px;">Don't let a small plumbing issue turn into a costly emergency. Call IHP Plumbing for fast, professional service.</div>
+  <div class="problems-grid">
+    <div class="problem-card">
+      <div class="problem-icon">💧</div>
+      <div>
+        <h4>Dripping Faucets</h4>
+        <p>A dripping faucet wastes thousands of gallons per year. We repair or replace it quickly and cleanly.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🚿</div>
+      <div>
+        <h4>Slow Drains</h4>
+        <p>Hair, grease, and soap scum build up over time. We clear drains completely — not just temporarily.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🚽</div>
+      <div>
+        <h4>Running Toilets</h4>
+        <p>A constantly running toilet can cost $200+ extra on your water bill. We diagnose and fix it right away.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🌡️</div>
+      <div>
+        <h4>No Hot Water</h4>
+        <p>Water heater on the fritz? We service all brands and can often repair or replace same-day.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💥</div>
+      <div>
+        <h4>Low Water Pressure</h4>
+        <p>Often caused by buildup, leaks, or aging pipes. We find the cause and fix it so pressure is restored.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔎</div>
+      <div>
+        <h4>Hidden Leaks</h4>
+        <p>High water bills with no obvious cause? We use advanced detection to find leaks behind walls and under slabs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Plumbing Problem? Call IHP.</h2>
+  <p>Serving Thousand Oaks, Westlake Village, Newbury Park, and all of Ventura County. Free estimates available.</p>
+  <a href="tel:8052976942" class="cta-phone">📞 (805) 297-6942</a>
+  <div class="cta-hours">Monday – Friday · 7:00 AM – 5:00 PM · Free Estimates</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">IHP <span>Plumbing</span></div>
+    <div class="footer-info">
+      2013 Los Feliz Dr #3, Thousand Oaks, CA 91362<br>
+      <a href="tel:8052976942" style="color:rgba(255,255,255,0.45);text-decoration:none;">(805) 297-6942</a> · Mon–Fri 7AM–5PM
+    </div>
+  </div>
+  <div class="footer-credit">
+    <div>© 2025 IHP Plumbing. All rights reserved.</div>
+    <div style="margin-top:6px;"><a href="tel:8053720416">Site by Evolve Home Services | (805) 372-0416</a></div>
+  </div>
+</footer>
+
+<!-- CHAT -->
+<div class="chat-widget">
+  <div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+      <h4>🔧 IHP Plumbing</h4>
+      <p>Thousand Oaks, CA</p>
+    </div>
+    <div class="chat-body">
+      <p>Have a plumbing issue? Call us for a free estimate. We serve all of Ventura County!</p>
+      <a href="tel:8052976942">Call (805) 297-6942</a>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="document.getElementById('chatPopup').classList.toggle('open')" aria-label="Contact">💬</button>
+</div>
+
+</body>
+</html>

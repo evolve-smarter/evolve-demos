@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John's Heating & AC Repair | Ventura, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #122040;
+      --navy-light: #1a3a6b;
+      --sky: #38bdf8;
+      --sky-light: #7dd3fc;
+      --sky-pale: #e0f2fe;
+      --white: #ffffff;
+      --gray-100: #f4f8fc;
+      --gray-200: #dde8f0;
+      --gray-600: #64748b;
+      --text: #0f172a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; background: var(--sky);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-logo-text { color: var(--white); font-weight: 800; font-size: 1rem; line-height: 1.2; }
+    .nav-logo-text span { color: var(--sky); }
+    .nav-cta {
+      background: var(--sky); color: var(--navy); font-weight: 800; font-size: 0.9rem;
+      padding: 10px 22px; border-radius: 6px; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--sky-light); }
+    .nav-phone { color: var(--white); font-weight: 600; font-size: 0.95rem; text-decoration: none; margin-right: 18px; }
+    .nav-phone:hover { color: var(--sky); }
+    .nav-right { display: flex; align-items: center; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 55%, #0c2a52 100%);
+      color: var(--white); padding: 90px 5% 80px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.35);
+      color: var(--sky-light); font-size: 0.82rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 3.3rem); font-weight: 900; line-height: 1.1;
+      max-width: 680px; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--sky); }
+    .hero p {
+      font-size: 1.12rem; color: rgba(255,255,255,0.75); max-width: 560px;
+      line-height: 1.7; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--sky); color: var(--navy); font-weight: 800; font-size: 1rem;
+      padding: 15px 32px; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--sky-light); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.3); color: var(--white); font-weight: 600; font-size: 1rem;
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--sky); background: rgba(56,189,248,0.1); }
+    .hero-stats { display: flex; gap: 40px; margin-top: 52px; flex-wrap: wrap; }
+    .hero-stat-num { font-size: 2rem; font-weight: 900; color: var(--sky); }
+    .hero-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.55); font-weight: 500; margin-top: 2px; }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--sky); padding: 14px 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 36px; flex-wrap: wrap;
+    }
+    .trust-item { color: var(--navy); font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
+
+    /* SERVICES */
+    .services { padding: 80px 5%; background: var(--gray-100); }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; color: var(--sky); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--navy); margin-bottom: 14px; line-height: 1.2; }
+    .section-sub { color: var(--gray-600); font-size: 1.05rem; max-width: 540px; line-height: 1.65; margin-bottom: 50px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .service-card {
+      background: var(--white); border-radius: 12px; padding: 30px 26px;
+      border: 1px solid var(--gray-200); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(10,22,40,0.1); transform: translateY(-3px); }
+    .service-icon {
+      width: 52px; height: 52px; background: var(--sky-pale); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px;
+    }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .service-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+
+    /* WHY US */
+    .why-us { padding: 80px 5%; background: var(--white); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .why-points { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .why-point { display: flex; gap: 16px; align-items: flex-start; }
+    .why-point-icon {
+      width: 44px; height: 44px; min-width: 44px; background: var(--navy-light);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .why-point h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .why-point p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.55; }
+    .why-visual {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-radius: 16px; padding: 40px 36px; color: var(--white);
+    }
+    .rating-display { text-align: center; padding: 28px; border-radius: 12px; background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.3); margin-bottom: 24px; }
+    .rating-num { font-size: 4rem; font-weight: 900; color: var(--sky); line-height: 1; }
+    .rating-stars { font-size: 1.8rem; color: var(--sky); margin: 8px 0; }
+    .rating-count { font-size: 0.88rem; color: rgba(255,255,255,0.55); }
+    .perfect-badge {
+      background: rgba(56,189,248,0.2); border: 1px solid rgba(56,189,248,0.35);
+      color: var(--sky-light); font-size: 0.82rem; font-weight: 700; padding: 4px 12px;
+      border-radius: 20px; display: inline-block; margin-top: 8px;
+    }
+    .review-item { padding: 16px; background: rgba(255,255,255,0.07); border-radius: 8px; margin-bottom: 12px; }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-stars { color: var(--sky); font-size: 0.88rem; margin-bottom: 6px; }
+    .review-text { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.5; font-style: italic; }
+    .review-author { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 6px; font-weight: 600; }
+
+    /* ABOUT */
+    .about { padding: 80px 5%; background: var(--navy); color: var(--white); }
+    .about .section-title { color: var(--white); }
+    .about .section-sub { color: rgba(255,255,255,0.6); margin-bottom: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-card {
+      background: rgba(255,255,255,0.07); border-radius: 12px; padding: 30px 28px;
+      border: 1px solid rgba(56,189,248,0.15); margin-top: 32px;
+    }
+    .about-highlight { font-size: 1.5rem; font-weight: 900; color: var(--sky); margin-bottom: 6px; }
+    .about-label { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+
+    /* CTA */
+    .cta-section {
+      padding: 80px 5%;
+      background: linear-gradient(135deg, var(--sky) 0%, var(--sky-light) 100%);
+      text-align: center; color: var(--navy);
+    }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 16px; }
+    .cta-section p { font-size: 1.1rem; opacity: 0.85; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--navy); color: var(--sky); font-weight: 800; font-size: 1.6rem;
+      padding: 16px 40px; border-radius: 10px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(10,22,40,0.25);
+    }
+    .cta-phone:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(10,22,40,0.35); }
+    .cta-note { font-size: 0.88rem; opacity: 0.75; margin-top: 16px; color: var(--navy); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.5);
+      padding: 40px 5%; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .footer-brand { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .footer-brand span { color: var(--sky); }
+    .footer-info { font-size: 0.85rem; line-height: 1.7; margin-top: 8px; }
+    .footer-credit { font-size: 0.75rem; text-align: right; }
+    .footer-credit a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-credit a:hover { color: var(--sky); }
+
+    /* CHAT */
+    .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 999; }
+    .chat-btn {
+      width: 58px; height: 58px; background: var(--sky); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(56,189,248,0.4);
+      transition: transform 0.2s; font-size: 24px; border: none; color: var(--navy);
+    }
+    .chat-btn:hover { transform: scale(1.08); }
+    .chat-popup {
+      position: absolute; bottom: 70px; right: 0; width: 300px;
+      background: var(--white); border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15); display: none;
+      border: 1px solid var(--gray-200); overflow: hidden;
+    }
+    .chat-popup.open { display: block; }
+    .chat-header { background: var(--navy); padding: 16px 18px; }
+    .chat-header h4 { color: var(--white); font-size: 0.95rem; font-weight: 700; }
+    .chat-header p { color: rgba(255,255,255,0.55); font-size: 0.78rem; margin-top: 2px; }
+    .chat-body { padding: 16px 18px; }
+    .chat-body p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin-bottom: 14px; }
+    .chat-body a {
+      display: block; background: var(--sky); color: var(--navy); text-align: center;
+      padding: 11px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .why-grid, .about-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 4%; }
+      .nav-phone { display: none; }
+      .hero { padding: 60px 4%; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">❄️</div>
+    <div class="nav-logo-text">John's Heating<br><span>& AC Repair</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="tel:8056690509" class="nav-phone">📞 (805) 669-0509</a>
+    <a href="tel:8056690509" class="nav-cta">Call Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⭐ Perfect 5.0 Stars · 46 Google Reviews · Ventura, CA</div>
+  <h1>Ventura's <span>Top-Rated</span><br>Heating & AC<br>Repair Service</h1>
+  <p>John's Heating & AC Repair brings over two decades of HVAC expertise to Ventura County homes. Fast, reliable, and rated a perfect 5 stars by every one of our customers.</p>
+  <div class="hero-actions">
+    <a href="tel:8056690509" class="btn-primary">📞 Call 24/7 — (805) 669-0509</a>
+    <a href="#services" class="btn-outline">View Services</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">5.0★</div>
+      <div class="hero-stat-label">Perfect Rating</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">46</div>
+      <div class="hero-stat-label">5-Star Reviews</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">Emergency Calls</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">All</div>
+      <div class="hero-stat-label">Brands Serviced</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">✓ Perfect 5-Star Rated</div>
+  <div class="trust-item">✓ Licensed & Insured</div>
+  <div class="trust-item">✓ 24/7 Emergency Service</div>
+  <div class="trust-item">✓ All Major Brands</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Services</div>
+  <div class="section-title">Complete HVAC Solutions</div>
+  <div class="section-sub">From routine tune-ups to emergency breakdowns, John's Heating & AC has you covered year-round in Ventura County.</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">❄️</div>
+      <h3>AC Repair</h3>
+      <p>Not cooling? Strange noises? We diagnose and repair all air conditioning problems fast — same-day service available when you need it most.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌡️</div>
+      <h3>Heating Repair</h3>
+      <p>Furnace, heat pump, or wall heater not working? We service all heating systems and brands. Don't spend a cold night without heat.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>AC Installation</h3>
+      <p>New or replacement central air conditioning systems. We help you select the right unit for your home's size and your comfort needs.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Furnace Installation</h3>
+      <p>High-efficiency gas furnace installation with proper sizing and ductwork assessment. Warm and comfortable all winter long.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <h3>Preventive Maintenance</h3>
+      <p>Annual tune-ups keep your system running efficiently, prevent breakdowns, and extend the life of your equipment.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌬️</div>
+      <h3>Duct Cleaning & Repair</h3>
+      <p>Dirty or leaking ducts hurt efficiency and air quality. We clean, seal, and repair ductwork for better comfort and lower bills.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="reviews">
+  <div class="why-grid">
+    <div class="why-content">
+      <div class="section-label">Why John's?</div>
+      <div class="section-title">The HVAC Tech Ventura Trusts</div>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">🏆</div>
+          <div>
+            <h4>Perfect 5-Star Rating</h4>
+            <p>Every single customer has given us 5 stars. That's not luck — it's a commitment to doing the job right every time.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">⚡</div>
+          <div>
+            <h4>Same-Day & Emergency Service</h4>
+            <p>AC out in summer? Heater down in winter? We prioritize emergency calls and offer same-day service for your urgent needs.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">💰</div>
+          <div>
+            <h4>Honest, Upfront Pricing</h4>
+            <p>We give you a clear price before we start. No surprise charges, no upselling. Just fair, transparent HVAC service.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🔧</div>
+          <div>
+            <h4>All Brands, All Systems</h4>
+            <p>Carrier, Trane, Lennox, Goodman — we service all makes and models of heating and air conditioning equipment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="rating-display">
+        <div class="rating-num">5.0</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">Based on 46 Google Reviews</div>
+        <div class="perfect-badge">🏆 Perfect Score</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"John came out same day when our AC stopped working in the middle of summer. Fixed quickly, priced fairly, and was extremely professional. 10/10!"</div>
+        <div class="review-author">— Maria G., Ventura</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Best HVAC tech I've ever worked with. Diagnosed the furnace issue immediately, had the part, and finished in under 2 hours. Highly recommend!"</div>
+        <div class="review-author">— David L., Oxnard</div>
+      </div>
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Honest, efficient, and affordable. John explained exactly what was wrong and what it would cost before touching anything. This is my HVAC guy for life."</div>
+        <div class="review-author">— Priya S., Camarillo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Us</div>
+      <div class="section-title">Local HVAC Expertise You Can Rely On</div>
+      <div class="section-sub" style="margin-top:16px;">
+        John's Heating & AC Repair has been serving Ventura County homeowners with honest, expert HVAC service. Based in Ventura, we're your local technicians — not a call center dispatching strangers. When you call John's, you get John.
+      </div>
+      <div class="about-card">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <div class="about-highlight">5.0★</div>
+            <div class="about-label">Perfect Google Rating</div>
+          </div>
+          <div>
+            <div class="about-highlight">46</div>
+            <div class="about-label">5-Star Reviews</div>
+          </div>
+          <div>
+            <div class="about-highlight">24/7</div>
+            <div class="about-label">Available</div>
+          </div>
+          <div>
+            <div class="about-highlight">All</div>
+            <div class="about-label">Brands Serviced</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Service Area</div>
+      <div class="section-title">Serving Ventura County</div>
+      <div class="section-sub" style="margin-top:16px; color:rgba(255,255,255,0.6);">
+        We proudly serve homeowners and businesses throughout Ventura County including Ventura, Oxnard, Camarillo, Thousand Oaks, Simi Valley, and surrounding communities.
+      </div>
+      <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display:flex; align-items:center; gap:10px; font-size:0.92rem; color:rgba(255,255,255,0.7);">
+          <span style="color:var(--sky);">📍</span> 181 S Ash St Unit J, Ventura, CA 93001
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:0.92rem; color:rgba(255,255,255,0.7);">
+          <span style="color:var(--sky);">📞</span> <a href="tel:8056690509" style="color:rgba(255,255,255,0.7);text-decoration:none;">(805) 669-0509</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:0.92rem; color:rgba(255,255,255,0.7);">
+          <span style="color:var(--sky);">🕐</span> Available 24 Hours, 7 Days a Week
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>AC or Heat Not Working?</h2>
+  <p>Don't sweat it — or freeze. John's is available around the clock for emergency HVAC service throughout Ventura County.</p>
+  <a href="tel:8056690509" class="cta-phone">📞 (805) 669-0509</a>
+  <div class="cta-note">Available 24/7 · 5-Star Rated · Ventura, CA</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">John's Heating <span>& AC Repair</span></div>
+    <div class="footer-info">
+      181 S Ash St Unit J, Ventura, CA 93001<br>
+      <a href="tel:8056690509" style="color:rgba(255,255,255,0.5);text-decoration:none;">(805) 669-0509</a> · Open 24 Hours
+    </div>
+  </div>
+  <div class="footer-credit">
+    <div>© 2025 John's Heating & AC Repair. All rights reserved.</div>
+    <div style="margin-top:6px;"><a href="tel:8053720416">Site by Evolve Home Services | (805) 372-0416</a></div>
+  </div>
+</footer>
+
+<!-- CHAT -->
+<div class="chat-widget">
+  <div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+      <h4>❄️ John's Heating & AC</h4>
+      <p>Available 24/7 for HVAC help</p>
+    </div>
+    <div class="chat-body">
+      <p>Having heating or AC trouble? Call us now — we offer same-day and emergency service!</p>
+      <a href="tel:8056690509">Call (805) 669-0509</a>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="document.getElementById('chatPopup').classList.toggle('open')" aria-label="Contact">💬</button>
+</div>
+
+</body>
+</html>
