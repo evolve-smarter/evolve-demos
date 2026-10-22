@@ -178,7 +178,7 @@ tr:last-child td{border-bottom:none}
       <label class="snap-btn" for="photo">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
         <span>Snap a lead<small>Van, truck wrap, yard sign, flyer or business card</small></span>
-        <input id="photo" type="file" accept="image/*" capture="environment">
+        <input id="photo" type="file" accept="image/*,.heic,.heif">
       </label>
       <div class="flow"><span>Read the photo</span><span>Deep research</span><span>Audit + competitors</span><span>ROI</span><span>Demo prompt</span><span>Text + email</span></div>
       <p class="note" id="capNote"></p>
@@ -242,6 +242,7 @@ const TRADES = {
   painting:{label:"Painting",ticket:3800,tSrc:"est",calls:50,close:30},
   masonry:{label:"Masonry / concrete",ticket:4500,tSrc:"est",calls:40,close:30},
   construction:{label:"General construction",ticket:15000,tSrc:"est",calls:30,close:20},
+  windows:{label:"Windows & doors",ticket:8000,tSrc:"est",calls:50,close:30},
   cleaning:{label:"Cleaning",ticket:250,tSrc:"est",calls:80,close:45},
   pest:{label:"Pest control",ticket:350,tSrc:"est",calls:80,close:45},
   garage:{label:"Garage door",ticket:650,tSrc:"est",calls:70,close:45},
@@ -349,10 +350,14 @@ function renderList(){
 $("#photo").addEventListener("change", async e=>{
   const file = e.target.files?.[0]; e.target.value="";
   if(!file) return;
-  draft = {file};
   const p=$("#extractPanel"); p.hidden=false;
-  $("#extractImg").src = URL.createObjectURL(file);
   $("#extractBody").hidden=true; $("#tierPick").hidden=true; $("#extractBtns").hidden=true;
+  setStatus("Preparing the photo…", true);
+  let jpg;
+  try{ jpg = await toJpeg(file) }
+  catch{ setStatus("This photo format can't be opened here. In iPhone Settings → Camera → Formats, choose Most Compatible, or take the photo with the Snap button."); return; }
+  draft = {file:jpg};
+  $("#extractImg").src = URL.createObjectURL(jpg);
   if(!sample){ showFields({}); setStatus("Photo reading is unavailable here. Fill in what you can see."); return; }
   setStatus("Reading the photo…", true);
   try{
@@ -361,7 +366,7 @@ $("#photo").addEventListener("change", async e=>{
 Read everything visible in the image. Do not guess facts that are not visible; leave a field empty instead.
 Reply with only this JSON object:
 {"name":"business name","trade":"one of: ${Object.keys(TRADES).join(", ")}","city":"city and state if visible or implied by phone area code, else empty","phone":"","website":"","email":"","license":"license number if shown","services":["services listed"],"slogan":"","colors":["main brand colors as plain words or hex"],"mascot":"describe any mascot or character, else empty","other":"anything else useful (social handles, years in business, offers)","confidence":"high|medium|low"}`,
-      {images:[file], modelTier:"default"});
+      {images:[jpg], modelTier:"default"});
     draft.extracted = data;
     showFields(data);
     setStatus(data.confidence==="low" ? "Low confidence read. Check the fields before you save." : "Here is what I read. Fix anything that is off.");
@@ -370,6 +375,30 @@ Reply with only this JSON object:
     setStatus(err.code==="not_granted" ? "Claude access was declined for this page, so fill in the fields by hand." : err.code==="image_rejected" ? "That photo could not be read. Try another shot." : "Could not read the photo ("+err.code+"). Fill in the fields by hand.");
   }
 });
+/* iPhone photos are often HEIC, which Claude can't read. Re-encode every photo as a JPEG (max 1600px). */
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.append(s)})}
+async function decode(blob){
+  try{ return await createImageBitmap(blob) }catch{}
+  const url=URL.createObjectURL(blob), img=new Image(); img.src=url;
+  try{ await img.decode(); return img }catch{ return null } finally{ setTimeout(()=>URL.revokeObjectURL(url),5000) }
+}
+async function toJpeg(file){
+  let src = await decode(file);
+  if(!src && /hei[cf]/i.test(file.type+" "+file.name)){
+    if(!window.heic2any){
+      try{ await loadScript("https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js") }
+      catch{ await loadScript("https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js") }
+    }
+    let out = await window.heic2any({blob:file,toType:"image/jpeg",quality:0.85});
+    if(Array.isArray(out)) out=out[0];
+    src = await decode(out);
+  }
+  if(!src) throw new Error("undecodable");
+  const w=src.width||src.naturalWidth, h=src.height||src.naturalHeight, k=Math.min(1,1600/Math.max(w,h));
+  const c=document.createElement("canvas"); c.width=Math.round(w*k); c.height=Math.round(h*k);
+  c.getContext("2d").drawImage(src,0,0,c.width,c.height);
+  return await new Promise((ok,no)=>c.toBlob(b=>b?ok(b):no(new Error("encode")),"image/jpeg",0.85));
+}
 function setStatus(msg,spin){ $("#extractStatus").innerHTML = (spin?'<span class="spin"></span>':"")+esc(msg) }
 function showFields(d){
   $("#f_name").value=d.name||""; $("#f_city").value=d.city||""; $("#f_phone").value=d.phone||"";
