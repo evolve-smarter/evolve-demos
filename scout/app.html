@@ -481,6 +481,7 @@ function renderFile(){
 }
 function researchBanner(l){
   if(l.example) return "";
+  if(l.status==="error") return `<div class="box"><b>Research didn't finish</b><div class="row-btns"><button class="primary" id="runResearch">Run research again</button></div></div>`;
   if(l.status==="new") return `<div class="box"><b>No research yet</b><p class="muted">The money math below uses trade benchmarks. Deep research adds their Google reviews, website check, competitors and the demo prompt.</p><div class="row-btns"><button class="primary" id="runResearch">Start deep research</button></div></div>`;
   if(l.status==="queued"||l.status==="researching") return `<div class="status-line"><span class="spin"></span>${l.status==="queued"?"Research queued. This page updates by itself when it finishes.":"Claude is researching this business now."}</div>`;
   return "";
