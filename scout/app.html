@@ -1,0 +1,584 @@
+<title>Evolve Scout</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one-column field tool, phone first. Lead list → lead file with a sticky section bar. */
+:root{
+  --bg:#f6f5fb; --surface:#ffffff; --sunk:#efedf7; --line:#dedbea;
+  --fg:#16141f; --muted:#5f5b73; --faint:#8b87a0;
+  --accent:#7c3aed; --accent-2:#0891b2; --accent-ink:#ffffff;
+  --loss:#c2410c; --loss-bg:#fff1e8; --win:#047857; --win-bg:#e7f7ef; --warn:#a16207; --warn-bg:#fdf6dc;
+  --display:'Outfit',ui-sans-serif,system-ui,sans-serif;
+  --body:'Outfit',ui-sans-serif,system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c0b12; --surface:#15141f; --sunk:#1c1a29; --line:#2a2740;
+  --fg:#ece9f7; --muted:#a29dba; --faint:#77728f;
+  --accent:#a78bfa; --accent-2:#22d3ee; --accent-ink:#120c22;
+  --loss:#fb923c; --loss-bg:#2a1609; --win:#34d399; --win-bg:#0a2219; --warn:#facc15; --warn-bg:#262007;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0c0b12; --surface:#15141f; --sunk:#1c1a29; --line:#2a2740;
+  --fg:#ece9f7; --muted:#a29dba; --faint:#77728f;
+  --accent:#a78bfa; --accent-2:#22d3ee; --accent-ink:#120c22;
+  --loss:#fb923c; --loss-bg:#2a1609; --win:#34d399; --win-bg:#0a2219; --warn:#facc15; --warn-bg:#262007;
+  color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 64px;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.15}
+h2{font-size:20px;font-weight:700}
+h3{font-size:15px;font-weight:600}
+p{margin:0}
+.label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:12.5px}
+button,.btn{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;justify-content:center;text-decoration:none}
+button:hover,.btn:hover{border-color:var(--accent)}
+button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.ghost{background:transparent}
+button:disabled{opacity:.55;cursor:default}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:90px;font-size:14px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand h1{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.brand h1 b{color:var(--accent)}
+.brand span{color:var(--faint);font-size:13px}
+
+/* snap card */
+.snap{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px}
+.snap-btn{position:relative;display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:17px;cursor:pointer}
+.snap-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.snap-btn svg{flex:none}
+.snap-btn small{display:block;font-weight:500;font-size:13px;opacity:.85}
+.snap-btn:focus-within{outline:2px solid var(--accent-2);outline-offset:3px}
+.flow{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.flow span{padding:3px 8px;border-radius:99px;background:var(--sunk)}
+
+/* lead list */
+.list{display:grid;gap:10px}
+.lead-row{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);cursor:pointer;text-align:left;width:100%;font-weight:400}
+.lead-row img,.thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--sunk)}
+.lead-row .t{min-width:0}
+.lead-row .t b{display:block;font-family:var(--display);font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lead-row .t span{font-size:13px;color:var(--muted)}
+.lead-row .money{text-align:right;font-family:var(--display);font-weight:700;color:var(--loss)}
+.lead-row .money small{display:block;font-family:var(--body);font-weight:500;font-size:11px;color:var(--faint)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.ready{background:var(--win-bg);color:var(--win)}
+.chip.queued,.chip.researching{background:var(--warn-bg);color:var(--warn)}
+.chip.error{background:var(--loss-bg);color:var(--loss)}
+.empty{padding:28px 18px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
+
+/* extraction panel */
+.extract{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start}
+.extract img{width:120px;border-radius:12px;aspect-ratio:3/4;object-fit:cover;max-width:100%}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.fields label{display:grid;gap:4px;font-size:12px;color:var(--muted);min-width:0}
+.fields .full{grid-column:1/-1}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tier{border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;display:grid;gap:2px;background:var(--surface)}
+.tier input{position:absolute;opacity:0}
+.tier:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.tier b{font-family:var(--display)}
+.tier span{font-size:12.5px;color:var(--muted)}
+.status-line{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:sp 0.8s linear infinite;flex:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+
+/* lead file */
+.file-head{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.file-head img{width:72px;height:72px;border-radius:14px;object-fit:cover}
+.file-head h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;color:var(--muted);margin-top:4px}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;overflow-x:auto;padding-block:8px;border-bottom:1px solid var(--line)}
+.tabs button{border:none;background:transparent;color:var(--muted);padding:8px 12px;border-radius:8px;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--sunk);color:var(--fg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.panel{display:grid;gap:18px}
+
+/* money */
+.bleed{border-radius:16px;padding:20px;background:var(--loss-bg);display:grid;gap:6px}
+.bleed .big{font-family:var(--display);font-size:clamp(40px,11vw,64px);font-weight:800;line-height:1;color:var(--loss);letter-spacing:-.02em}
+.bleed .big small{font-size:.35em;font-weight:600}
+.math{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.math div{background:var(--surface);border-radius:10px;padding:10px;display:grid;gap:2px;min-width:0}
+.math b{font-family:var(--display);font-size:20px}
+.math span{font-size:11.5px;color:var(--muted);line-height:1.3}
+.knobs{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.knob{display:grid;gap:4px;font-size:13px;min-width:0}
+.knob .row{display:flex;justify-content:space-between;gap:8px}
+.knob .row b{font-variant-numeric:tabular-nums}
+.knob small{color:var(--faint);font-size:11px;line-height:1.3}
+input[type=range]{padding:0;border:none;background:transparent;accent-color:var(--accent)}
+.roi{border-radius:16px;padding:20px;background:var(--win-bg);display:grid;gap:12px}
+.roi .pair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.roi .pair div{display:grid;gap:2px}
+.roi .pair b{font-family:var(--display);font-size:clamp(22px,6vw,32px);color:var(--win);line-height:1.1}
+.roi .pair span{font-size:12px;color:var(--muted)}
+.scale{display:grid;gap:6px}
+.bar{height:26px;border-radius:6px;display:flex;align-items:center;padding:0 8px;font-size:12px;font-weight:600;color:var(--accent-ink);min-width:fit-content;white-space:nowrap}
+
+/* gaps */
+.gaps{display:grid;gap:8px}
+.gap{display:grid;grid-template-columns:4px 1fr;gap:12px;padding:12px 14px 12px 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.gap i{background:var(--faint)}
+.gap.high i{background:var(--loss)} .gap.med i{background:var(--warn)} .gap.low i{background:var(--win)}
+.gap b{font-family:var(--display)}
+.gap p{font-size:13.5px;color:var(--muted)}
+.gap .fix{font-size:12px;color:var(--accent);font-weight:600;margin-top:4px}
+
+/* competitors */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.you td{background:var(--loss-bg)}
+tr:last-child td{border-bottom:none}
+.yes{color:var(--win);font-weight:600}.no{color:var(--loss);font-weight:600}
+
+/* demo + send */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap}
+.pending{border:1px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);font-size:14px}
+.sources{font-size:12.5px;color:var(--muted);display:grid;gap:4px}
+.sources a{color:var(--accent-2);word-break:break-all}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;z-index:20}
+.note{font-size:12.5px;color:var(--faint)}
+@media (max-width:560px){
+  .extract{grid-template-columns:1fr}
+  .extract img{width:100%;aspect-ratio:4/3}
+  .fields,.knobs{grid-template-columns:1fr}
+  .math{grid-template-columns:1fr 1fr}
+  .roi .pair{grid-template-columns:1fr 1fr 1fr}
+  .file-head h2{font-size:22px}
+}
+</style>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <div class="brand"><h1>Evolve <b>Scout</b></h1><span id="count"></span></div>
+    <button class="ghost" id="homeBtn" hidden>All leads</button>
+  </header>
+
+  <!-- HOME -->
+  <section id="home" class="panel">
+    <div class="snap">
+      <label class="snap-btn" for="photo">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <span>Snap a lead<small>Van, truck wrap, yard sign, flyer or business card</small></span>
+        <input id="photo" type="file" accept="image/*" capture="environment">
+      </label>
+      <div class="flow"><span>Read the photo</span><span>Deep research</span><span>Audit + competitors</span><span>ROI</span><span>Demo prompt</span><span>Text + email</span></div>
+      <p class="note" id="capNote"></p>
+    </div>
+
+    <section id="extractPanel" class="snap" hidden>
+      <div class="status-line" id="extractStatus"></div>
+      <div class="extract" id="extractBody" hidden>
+        <img id="extractImg" alt="Photo you took">
+        <div class="fields">
+          <label class="full">Business name<input id="f_name"></label>
+          <label>Trade<select id="f_trade"></select></label>
+          <label>City<input id="f_city"></label>
+          <label>Phone<input id="f_phone" inputmode="tel"></label>
+          <label>Website<input id="f_website" inputmode="url"></label>
+          <label class="full">Services seen<input id="f_services"></label>
+          <label class="full">Brand notes (colors, mascot, slogan)<input id="f_brand"></label>
+        </div>
+      </div>
+      <div class="tiers" id="tierPick" hidden>
+        <label class="tier"><input type="radio" name="tier" value="standard" checked><b>Standard demo</b><span>AI Studio site with chat and voice agent</span></label>
+        <label class="tier"><input type="radio" name="tier" value="premium"><b>Premium demo</b><span>Adds a Higgsfield 3D hero that plays on scroll</span></label>
+      </div>
+      <div class="row-btns" id="extractBtns" hidden>
+        <button class="primary" id="saveResearch">Save and start deep research</button>
+        <button id="saveOnly">Save without research</button>
+        <button class="ghost" id="discard">Discard</button>
+      </div>
+    </section>
+
+    <div style="display:grid;gap:10px">
+      <div class="label">Leads</div>
+      <div class="list" id="list"></div>
+    </div>
+  </section>
+
+  <!-- LEAD FILE -->
+  <section id="file" class="panel" hidden></section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const TRIGGER_ID = "trig_01QXQ4yvQ6dbs54zhSaSP1kr";
+
+/* ---------- Benchmarks (each number carries where it came from) ---------- */
+const SRC = {
+  serviceDirect:{t:"Service Direct study: local home service companies answered 66% of calls (thought they answered 97%)",u:"https://www.signpost.com/blog/how-much-revenue-do-home-services-businesses-lose-from-missed-calls"},
+  callrail:{t:"CallRail Jan 2025 benchmark: home services missed 14% of calls (low end)",u:"https://stealthagents.com/research/home-services-missed-call-revenue-statistics-2026"},
+  moneypenny:{t:"Moneypenny small business call report: 69% of callers sent to voicemail hung up without leaving a message",u:"https://moneypenny.com/us/resources/news/small-business-call-report/"},
+  hcp:{t:"Housecall Pro platform data: average HVAC repair revenue per job $1,205 in 2025",u:"https://www.servicetitan.com/guides/residential-trades-report-2025"},
+  searchlight:{t:"SearchLight Digital, Jan 2026, 816 contractors on Google Ads: plumbing $2,208/job at 41.5% book rate, electrical $2,491/job",u:"https://pipelineon.com/blog/hvac-plumbing-electrical-pricing-strategy/"},
+  est:{t:"Evolve working estimate. Replace with the owner's real number when you have it",u:""}
+};
+const TRADES = {
+  hvac:{label:"HVAC",ticket:1205,tSrc:"hcp",calls:120,close:42},
+  plumbing:{label:"Plumbing",ticket:2208,tSrc:"searchlight",calls:110,close:42},
+  electrical:{label:"Electrical",ticket:2491,tSrc:"searchlight",calls:90,close:40},
+  roofing:{label:"Roofing",ticket:9500,tSrc:"est",calls:60,close:25},
+  landscaping:{label:"Landscaping",ticket:450,tSrc:"est",calls:70,close:35},
+  tree:{label:"Tree service",ticket:1100,tSrc:"est",calls:60,close:40},
+  painting:{label:"Painting",ticket:3800,tSrc:"est",calls:50,close:30},
+  masonry:{label:"Masonry / concrete",ticket:4500,tSrc:"est",calls:40,close:30},
+  construction:{label:"General construction",ticket:15000,tSrc:"est",calls:30,close:20},
+  cleaning:{label:"Cleaning",ticket:250,tSrc:"est",calls:80,close:45},
+  pest:{label:"Pest control",ticket:350,tSrc:"est",calls:80,close:45},
+  garage:{label:"Garage door",ticket:650,tSrc:"est",calls:70,close:45},
+  care:{label:"Home / senior care",ticket:4500,tSrc:"est",calls:40,close:25},
+  other:{label:"Other home service",ticket:1000,tSrc:"est",calls:60,close:35}
+};
+const DEFAULTS = {miss:34, noCallback:69, capture:80, price:497};
+
+function inputsFor(lead){
+  const t = TRADES[lead.business?.trade] || TRADES.other;
+  return Object.assign({calls:t.calls, miss:DEFAULTS.miss, noCallback:DEFAULTS.noCallback, close:t.close, ticket:t.ticket, capture:DEFAULTS.capture, price:DEFAULTS.price}, lead.inputs||{});
+}
+function calc(i){
+  const missed = i.calls*i.miss/100;
+  const lostLeads = missed*i.noCallback/100;
+  const lostJobs = lostLeads*i.close/100;
+  const lost = lostJobs*i.ticket;
+  const recovered = lost*i.capture/100;
+  const roi = i.price>0 ? recovered/i.price : 0;
+  const payback = recovered>0 ? Math.max(1,Math.round(i.price/(recovered/30))) : null;
+  return {missed,lostLeads,lostJobs,lost,recovered,roi,payback,yearly:lost*12};
+}
+const $ = s=>document.querySelector(s);
+const money = n=>"$"+Math.round(n).toLocaleString("en-US");
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,2600)}
+async function copy(text,btn){
+  try{await navigator.clipboard.writeText(text);toast("Copied")}
+  catch{const ta=btn?.closest(".box")?.querySelector("textarea");if(ta){ta.focus();ta.select()}toast("Select the text and copy it")}
+}
+const STATUS = {new:"Saved",queued:"Research queued",researching:"Researching",ready:"Ready to send",error:"Needs attention"};
+
+/* ---------- Example lead shown until real ones exist ---------- */
+const EXAMPLE = {id:"example", example:true, status:"ready", createdAt:"",
+  business:{name:"Example: Ridgeline Plumbing",trade:"plumbing",city:"Camarillo, CA",phone:"(805) 555-0142",website:"ridgelineplumbing-example.com",services:["Drain cleaning","Water heaters","Repiping"],brand:"Navy and orange van, beaver mascot"},
+  research:{summary:"Sample data so you can see the layout. Snap a real van to replace it.",
+    google:{rating:4.6,reviews:38},
+    website:{exists:true,mobile:"poor",speed:"slow",chat:false,bookOnline:false,ssl:true,notes:"Template site, no click-to-call above the fold"},
+    gaps:[
+      {sev:"high",title:"No one answers after 5pm",detail:"Voicemail after hours. About a third of plumbing calls come in evenings and weekends.",fix:"AI voice agent answers 24/7 and books the job"},
+      {sev:"high",title:"38 reviews against a local average of 210",detail:"The top three competitors average 210 reviews. Google ranks review count and recency.",fix:"Review automation after every job"},
+      {sev:"med",title:"Website has no chat or online booking",detail:"Visitors who will not call have no way to reach them.",fix:"Smart website with AI chat"},
+      {sev:"low",title:"Google profile missing service area",detail:"Service area and hours are incomplete.",fix:"Profile cleanup"}],
+    competitors:[
+      {name:"Example competitor A",rating:4.9,reviews:312,website:true,chat:true,after:true},
+      {name:"Example competitor B",rating:4.8,reviews:187,website:true,chat:false,after:true},
+      {name:"Example competitor C",rating:4.7,reviews:131,website:true,chat:true,after:false}],
+    sources:[]},
+  outreach:{sms:"",emailSubject:"",emailBody:""}, demo:{}};
+
+/* ---------- State ---------- */
+let db=null, assets=null, sample=null, mcp=null;
+let leads=[], current=null, currentTab="audit", draft=null;
+
+(async function boot(){
+  fillTradeSelect();
+  renderList();
+  try{ db = await claude.use("db") }catch{}
+  try{ assets = await claude.use("assets") }catch{}
+  try{ sample = await claude.use("sample") }catch{}
+  try{ mcp = await claude.use("mcp") }catch{}
+  const notes=[];
+  if(!sample) notes.push("Photo reading is off in this view. Open Scout in the Claude app or claude.ai to use it.");
+  if(!db) notes.push("Sign in to save leads.");
+  $("#capNote").textContent = notes.join(" ");
+  if(db){
+    db.collection("leads").orderBy("createdAt","desc").limit(200).onSnapshot(snap=>{
+      leads = snap.docs.map(d=>({id:d.id,...d.data()}));
+      renderList();
+      if(current && !current.example){
+        const fresh = leads.find(l=>l.id===current.id);
+        if(fresh){ current=fresh; if(!document.activeElement?.closest("#file")) renderFile(); }
+      }
+    }, e=>{ $("#capNote").textContent="Could not load saved leads ("+e.code+")." });
+  }
+  const h = location.hash.slice(1);
+  if(h==="example") openLead(EXAMPLE);
+})();
+
+function fillTradeSelect(){
+  $("#f_trade").innerHTML = Object.entries(TRADES).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join("");
+}
+
+/* ---------- List ---------- */
+function photoUrl(l){ return l.photoAssetId ? "/_blob/"+l.photoAssetId : "" }
+function renderList(){
+  const rows = leads.length ? leads : [EXAMPLE];
+  $("#count").textContent = leads.length ? leads.length+(leads.length===1?" lead":" leads") : "";
+  $("#list").innerHTML = rows.map(l=>{
+    const c = calc(inputsFor(l));
+    const img = photoUrl(l) ? `<img src="${photoUrl(l)}" alt="">` : `<div class="thumb"></div>`;
+    return `<button class="lead-row" data-id="${esc(l.id)}">${img}
+      <div class="t"><b>${esc(l.business?.name||"Unnamed lead")}</b>
+        <span>${esc((TRADES[l.business?.trade]||TRADES.other).label)}${l.business?.city?" · "+esc(l.business.city):""}</span><br>
+        <span class="chip ${esc(l.status)}">${STATUS[l.status]||l.status}</span></div>
+      <div class="money num">${money(c.lost)}<small>lost / month</small></div></button>`;
+  }).join("") + (leads.length?"":`<p class="note">This is a sample lead. Your real leads replace it as soon as you snap one.</p>`);
+  document.querySelectorAll(".lead-row").forEach(b=>b.onclick=()=>{
+    const l = b.dataset.id==="example"?EXAMPLE:leads.find(x=>x.id===b.dataset.id);
+    if(l) openLead(l);
+  });
+}
+
+/* ---------- Snap + extract ---------- */
+$("#photo").addEventListener("change", async e=>{
+  const file = e.target.files?.[0]; e.target.value="";
+  if(!file) return;
+  draft = {file};
+  const p=$("#extractPanel"); p.hidden=false;
+  $("#extractImg").src = URL.createObjectURL(file);
+  $("#extractBody").hidden=true; $("#tierPick").hidden=true; $("#extractBtns").hidden=true;
+  if(!sample){ showFields({}); setStatus("Photo reading is unavailable here. Fill in what you can see."); return; }
+  setStatus("Reading the photo…", true);
+  try{
+    const data = await sample.json(
+`You are helping Evolve, a GoHighLevel AI agency for home service contractors, identify a local business from a photo Bryce took in the field (a work van, truck wrap, yard sign, flyer, brochure or business card).
+Read everything visible in the image. Do not guess facts that are not visible; leave a field empty instead.
+Reply with only this JSON object:
+{"name":"business name","trade":"one of: ${Object.keys(TRADES).join(", ")}","city":"city and state if visible or implied by phone area code, else empty","phone":"","website":"","email":"","license":"license number if shown","services":["services listed"],"slogan":"","colors":["main brand colors as plain words or hex"],"mascot":"describe any mascot or character, else empty","other":"anything else useful (social handles, years in business, offers)","confidence":"high|medium|low"}`,
+      {images:[file], modelTier:"default"});
+    draft.extracted = data;
+    showFields(data);
+    setStatus(data.confidence==="low" ? "Low confidence read. Check the fields before you save." : "Here is what I read. Fix anything that is off.");
+  }catch(err){
+    showFields({});
+    setStatus(err.code==="not_granted" ? "Claude access was declined for this page, so fill in the fields by hand." : err.code==="image_rejected" ? "That photo could not be read. Try another shot." : "Could not read the photo ("+err.code+"). Fill in the fields by hand.");
+  }
+});
+function setStatus(msg,spin){ $("#extractStatus").innerHTML = (spin?'<span class="spin"></span>':"")+esc(msg) }
+function showFields(d){
+  $("#f_name").value=d.name||""; $("#f_city").value=d.city||""; $("#f_phone").value=d.phone||"";
+  $("#f_website").value=d.website||""; $("#f_services").value=(d.services||[]).join(", ");
+  $("#f_trade").value = TRADES[d.trade]?d.trade:"other";
+  $("#f_brand").value=[(d.colors||[]).join(", "),d.mascot,d.slogan&&('"'+d.slogan+'"')].filter(Boolean).join(" · ");
+  $("#extractBody").hidden=false; $("#tierPick").hidden=false; $("#extractBtns").hidden=false;
+}
+$("#discard").onclick=()=>{ draft=null; $("#extractPanel").hidden=true };
+$("#saveOnly").onclick=()=>saveLead(false);
+$("#saveResearch").onclick=()=>saveLead(true);
+
+async function saveLead(research){
+  if(!db){ toast("Sign in to save leads"); return; }
+  const name=$("#f_name").value.trim();
+  if(!name){ toast("Add the business name first"); $("#f_name").focus(); return; }
+  const btns=[...document.querySelectorAll("#extractBtns button")]; btns.forEach(b=>b.disabled=true);
+  setStatus("Saving…",true);
+  try{
+    let photoAssetId="";
+    if(assets && draft?.file){ try{ photoAssetId=(await assets.upload(draft.file)).id }catch{} }
+    const id = "L"+Date.now().toString(36);
+    const lead = {createdAt:new Date().toISOString(), status:"new", tier:document.querySelector('input[name=tier]:checked').value, photoAssetId,
+      business:{name, trade:$("#f_trade").value, city:$("#f_city").value.trim(), phone:$("#f_phone").value.trim(), website:$("#f_website").value.trim(),
+        services:$("#f_services").value.split(",").map(s=>s.trim()).filter(Boolean), brand:$("#f_brand").value.trim()},
+      extracted: draft?.extracted||null};
+    await db.collection("leads").doc(id).set(lead);
+    $("#extractPanel").hidden=true; draft=null;
+    const saved={id,...lead};
+    if(research) await startResearch(saved);
+    openLead(leads.find(l=>l.id===id)||saved);
+  }catch(err){ setStatus("Could not save ("+(err.code||"error")+"). Try again."); }
+  finally{ btns.forEach(b=>b.disabled=false); }
+}
+
+async function startResearch(lead){
+  if(!db) return;
+  if(!mcp || TRIGGER_ID.startsWith("__")){
+    await db.collection("leads").doc(lead.id).update({status:"queued", queuedAt:new Date().toISOString()});
+    toast("Queued. Ask Claude to run research on it.");
+    return;
+  }
+  try{
+    await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:TRIGGER_ID,text:"lead_id: "+lead.id});
+    await db.collection("leads").doc(lead.id).update({status:"queued", queuedAt:new Date().toISOString()});
+    toast("Deep research started. This takes about 10 minutes.");
+  }catch(err){
+    const why = {server_not_connected:"the Claude Code connector isn't connected",not_in_manifest:"the Claude Code connector wasn't allowed for this page",needs_reauth:"the Claude Code connector needs to be reconnected",approval_required:"it needs your approval"}[err.code]||("error "+err.code);
+    await db.collection("leads").doc(lead.id).update({status:"queued", queuedAt:new Date().toISOString(), lastError:"Research did not start: "+why});
+    toast("Research did not start: "+why);
+  }
+}
+
+/* ---------- Lead file ---------- */
+function openLead(l){
+  current=l; currentTab="audit";
+  $("#home").hidden=true; $("#file").hidden=false; $("#homeBtn").hidden=false;
+  renderFile(); window.scrollTo(0,0);
+}
+$("#homeBtn").onclick=()=>{ current=null; $("#file").hidden=true; $("#home").hidden=false; $("#homeBtn").hidden=true; };
+
+const TABS=[["audit","Audit"],["competitors","Competitors"],["roi","ROI"],["demo","Demo"],["send","Send"]];
+function renderFile(){
+  const l=current, b=l.business||{}, r=l.research||{};
+  const img = photoUrl(l)?`<img src="${photoUrl(l)}" alt="Lead photo">`:`<div class="thumb" style="width:72px;height:72px"></div>`;
+  $("#file").innerHTML = `
+    <div class="file-head">${img}<div style="min-width:0">
+      <span class="chip ${esc(l.status)}">${STATUS[l.status]||esc(l.status)}</span>
+      <h2>${esc(b.name)}</h2>
+      <div class="meta"><span>${esc((TRADES[b.trade]||TRADES.other).label)}</span>${b.city?`<span>${esc(b.city)}</span>`:""}${b.phone?`<span class="num">${esc(b.phone)}</span>`:""}${b.website?`<span>${esc(b.website)}</span>`:""}${l.tier==="premium"?`<span>Premium demo</span>`:""}</div>
+    </div></div>
+    ${l.example?`<p class="pending">This is sample data that shows the layout. Snap a real lead from the home screen.</p>`:""}
+    ${l.lastError?`<p class="pending">${esc(l.lastError)}</p>`:""}
+    ${researchBanner(l)}
+    <nav class="tabs" role="tablist">${TABS.map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${k===currentTab}">${v}</button>`).join("")}</nav>
+    <div id="tabBody" class="panel"></div>`;
+  document.querySelectorAll(".tabs button").forEach(t=>t.onclick=()=>{currentTab=t.dataset.tab;renderFile()});
+  const rb=$("#runResearch"); if(rb) rb.onclick=async()=>{rb.disabled=true;await startResearch(current);rb.disabled=false};
+  ({audit:tabAudit,competitors:tabComp,roi:tabRoi,demo:tabDemo,send:tabSend})[currentTab]();
+}
+function researchBanner(l){
+  if(l.example) return "";
+  if(l.status==="new") return `<div class="box"><b>No research yet</b><p class="muted">The money math below uses trade benchmarks. Deep research adds their Google reviews, website check, competitors and the demo prompt.</p><div class="row-btns"><button class="primary" id="runResearch">Start deep research</button></div></div>`;
+  if(l.status==="queued"||l.status==="researching") return `<div class="status-line"><span class="spin"></span>${l.status==="queued"?"Research queued. This page updates by itself when it finishes.":"Claude is researching this business now."}</div>`;
+  return "";
+}
+
+function tabAudit(){
+  const l=current, r=l.research||{}, i=inputsFor(l), c=calc(i);
+  const g=r.google, comps=r.competitors||[];
+  const avgRev = comps.length? Math.round(comps.reduce((s,x)=>s+(+x.reviews||0),0)/comps.length):null;
+  $("#tabBody").innerHTML = `
+    <div class="bleed">
+      <div class="label" style="color:var(--loss)">Estimated revenue lost to missed calls</div>
+      <div class="big num">${money(c.lost)}<small> / month</small></div>
+      <p class="muted">${money(c.yearly)} a year, from about ${Math.round(c.missed)} missed calls a month.</p>
+      <div class="math num">
+        <div><b>${i.calls}</b><span>calls a month</span></div>
+        <div><b>${i.miss}%</b><span>go unanswered</span></div>
+        <div><b>${Math.round(c.lostJobs*10)/10}</b><span>jobs lost a month</span></div>
+        <div><b>${money(i.ticket)}</b><span>average job</span></div>
+      </div>
+    </div>
+    ${r.summary?`<p>${esc(r.summary)}</p>`:""}
+    <div class="label">Where they're leaking</div>
+    <div class="gaps">${(r.gaps&&r.gaps.length?r.gaps:defaultGaps(l)).map(gp=>`
+      <div class="gap ${esc(gp.sev)}"><i></i><div><b>${esc(gp.title)}</b><p>${esc(gp.detail)}</p>${gp.fix?`<div class="fix">Evolve fix: ${esc(gp.fix)}</div>`:""}</div></div>`).join("")}</div>
+    ${g?`<div class="box"><div class="label">Google reviews</div>
+      <div class="scale">${bar(b2(l.business.name),g.reviews,Math.max(g.reviews,...comps.map(x=>+x.reviews||0)),"var(--loss)")}
+      ${avgRev!=null?bar("Top local competitors (avg)",avgRev,Math.max(g.reviews,...comps.map(x=>+x.reviews||0)),"var(--accent)"):""}</div>
+      <p class="muted">${g.rating}★ from ${g.reviews} reviews${avgRev?`. They need about ${Math.max(0,avgRev-g.reviews)} more reviews to match the local average.`:""}</p></div>`:""}
+    ${sourcesBlock(r)}`;
+}
+function b2(s){return s.length>28?s.slice(0,26)+"…":s}
+function bar(label,v,max,color,disp){
+  const w = max? Math.max(8,Math.round(v/max*100)):8;
+  return `<div style="display:grid;gap:3px"><span style="font-size:12.5px" class="muted">${esc(label)}</span><div class="bar num" style="width:${w}%;background:${color}">${esc(disp??v)}</div></div>`;
+}
+function defaultGaps(l){
+  return [
+    {sev:"high",title:"Missed calls go to competitors",detail:"Home service companies answer about two thirds of their calls. Most callers who hit voicemail hang up and call the next company.",fix:"AI voice agent answers every call, 24/7"},
+    {sev:"med",title:"Reviews not yet checked",detail:"Deep research compares their Google reviews with the top local competitors.",fix:"Review automation"},
+    {sev:"med",title:"Website not yet checked",detail:"Deep research checks speed, mobile, chat and online booking.",fix:"Smart website with AI chat"}];
+}
+function sourcesBlock(r){
+  const own=(r.sources||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title||s.url)}</a>`);
+  return `<details class="sources"><summary>Where these numbers come from</summary>
+    ${[SRC.serviceDirect,SRC.moneypenny,SRC[(TRADES[current.business?.trade]||TRADES.other).tSrc]].map(s=>s.u?`<a href="${s.u}" target="_blank" rel="noopener">${esc(s.t)}</a>`:`<span>${esc(s.t)}</span>`).join("")}
+    ${own.join("")}</details>`;
+}
+
+function tabComp(){
+  const l=current, r=l.research||{}, comps=r.competitors||[], g=r.google, w=r.website;
+  if(!comps.length){ $("#tabBody").innerHTML=`<p class="pending">Competitors appear here after deep research: the top 3 on Google Maps for ${esc((TRADES[l.business.trade]||TRADES.other).label.toLowerCase())} near ${esc(l.business.city||"their city")}.</p>`; return; }
+  const yn=v=>v===true?'<span class="yes">Yes</span>':v===false?'<span class="no">No</span>':'<span class="muted">?</span>';
+  const you={name:l.business.name,rating:g?.rating,reviews:g?.reviews,website:w?.exists,chat:w?.chat,after:r.afterHours};
+  $("#tabBody").innerHTML=`
+    <p class="muted">How ${esc(l.business.name)} stacks up against the businesses winning the calls in ${esc(l.business.city||"their area")}.</p>
+    <div class="tbl-wrap"><table><thead><tr><th>Business</th><th class="n">Rating</th><th class="n">Reviews</th><th>Website</th><th>Chat</th><th>Answers after hours</th></tr></thead><tbody>
+    ${[you,...comps].map((x,k)=>`<tr class="${k===0?"you":""}"><td>${esc(x.name)}${k===0?" <span class='muted'>(them)</span>":""}</td><td class="n">${x.rating??"–"}</td><td class="n">${x.reviews??"–"}</td><td>${yn(x.website)}</td><td>${yn(x.chat)}</td><td>${yn(x.after)}</td></tr>`).join("")}
+    </tbody></table></div>
+    ${r.compTakeaway?`<div class="box"><div class="label">Why they're losing</div><p>${esc(r.compTakeaway)}</p></div>`:""}`;
+}
+
+function tabRoi(){
+  const l=current, i=inputsFor(l);
+  const knobs=[
+    ["calls","Calls per month",10,400,5,"Estimate for this trade. Ask the owner."],
+    ["miss","Calls unanswered (%)",5,70,1,"Industry average 34%. Low end 14%."],
+    ["noCallback","Callers who don't leave a message (%)",30,90,1,"69% hang up at voicemail."],
+    ["close","Calls that become jobs (%)",10,70,1,"Booking rate"],
+    ["ticket","Average job ($)",100,30000,50,SRC[(TRADES[l.business.trade]||TRADES.other).tSrc].t],
+    ["capture","Missed calls Evolve recovers (%)",30,100,5,"AI answers every call. Not every caller books."],
+    ["price","Evolve monthly price ($)",97,3000,1,"Set to the package you're pitching"]];
+  const draw=()=>{
+    const c=calc(i), max=Math.max(c.recovered,i.price);
+    $("#roiOut").innerHTML=`
+      <div class="pair num">
+        <div><b>${money(c.recovered)}</b><span>recovered a month</span></div>
+        <div><b>${c.roi>=1?Math.round(c.roi*10)/10+"×":(Math.round(c.roi*100)/100)+"×"}</b><span>return on Evolve</span></div>
+        <div><b>${c.payback?c.payback+(c.payback===1?" day":" days"):"–"}</b><span>to pay for itself</span></div>
+      </div>
+      <div class="scale">${bar("Evolve costs",i.price,max,"var(--accent)",money(i.price))}${bar("Evolve brings back",c.recovered,max,"var(--win)",money(c.recovered))}</div>
+      <p class="muted">One recovered job (${money(i.ticket)}) covers ${i.price>0?Math.round(i.ticket/i.price*10)/10:0} months of Evolve.</p>`;
+  };
+  $("#tabBody").innerHTML=`<div class="roi" id="roiOut"></div>
+    <div class="knobs">${knobs.map(([k,lab,mn,mx,st,hint])=>`<label class="knob" for="k_${k}"><div class="row"><span>${lab}</span><b id="v_${k}">${k==="ticket"||k==="price"?money(i[k]):i[k]+(lab.includes("%")?"%":"")}</b></div>
+      <input type="range" id="k_${k}" min="${mn}" max="${mx}" step="${st}" value="${i[k]}"><small>${esc(hint)}</small></label>`).join("")}</div>
+    <p class="note">${current.example?"Sample lead. Changes are not saved.":"Changes save to this lead and update the audit."}</p>`;
+  draw();
+  let t;
+  knobs.forEach(([k,lab])=>{ const el=$("#k_"+k); el.oninput=()=>{ i[k]=+el.value; $("#v_"+k).textContent=k==="ticket"||k==="price"?money(i[k]):i[k]+(lab.includes("%")?"%":""); draw();
+    clearTimeout(t); if(db&&!current.example) t=setTimeout(()=>db.collection("leads").doc(current.id).update({inputs:{...i}}).catch(()=>toast("Could not save the numbers")),700); }; });
+}
+
+function tabDemo(){
+  const l=current, d=l.demo||{};
+  $("#tabBody").innerHTML=`
+    <div class="box"><div class="label">${l.tier==="premium"?"Premium":"Standard"} demo</div>
+      ${d.url?`<a class="btn primary" href="${esc(d.url)}" target="_blank" rel="noopener">Open the demo site</a>`:`<p class="muted">No demo link yet. Paste the AI Studio prompt below into the Evolve Demos sub-account, then save the preview link here.</p>`}
+      <label class="knob" for="demoUrl">Demo link<input id="demoUrl" value="${esc(d.url||"")}" placeholder="https://"></label>
+      <div class="row-btns"><button id="saveDemo">Save link</button></div></div>
+    <div class="box"><div class="label">AI Studio prompt (Dom/Dalton method)</div>
+      ${d.aiStudioPrompt?`<textarea id="aiPrompt" rows="12" readonly>${esc(d.aiStudioPrompt)}</textarea><div class="row-btns"><button class="primary" id="copyPrompt">Copy prompt</button></div>`:`<p class="pending">Deep research writes this prompt from what it finds, following your Variant 2 template.</p>`}</div>
+    ${l.tier==="premium"?`<div class="box"><div class="label">Premium hero (Higgsfield)</div>${d.heroImage?`<img src="${esc(d.heroImage)}" alt="Generated hero" style="border-radius:10px">`:""}${d.heroPrompt?`<textarea rows="5" readonly>${esc(d.heroPrompt)}</textarea>`:`<p class="pending">Deep research drafts the 3D scroll hero prompt for Higgsfield.</p>`}</div>`:""}`;
+  $("#saveDemo").onclick=async()=>{ if(!db||l.example) return toast("Sample lead. Not saved"); try{await db.collection("leads").doc(l.id).update({demo:{...d,url:$("#demoUrl").value.trim()}});toast("Saved")}catch{toast("Could not save")} };
+  const cp=$("#copyPrompt"); if(cp) cp.onclick=()=>copy(d.aiStudioPrompt,cp);
+}
+
+function tabSend(){
+  const l=current, o=l.outreach||{}, c=calc(inputsFor(l)), b=l.business;
+  const report=l.reportUrl||"", pay=l.paymentLink||"";
+  const sms=o.sms||`Hi, this is Bryce with Evolve. I saw your ${(TRADES[b.trade]||TRADES.other).label.toLowerCase()} van and put together a free audit for ${b.name}. It shows about ${money(c.lost)}/mo you may be losing to missed calls, plus a demo site we built for you.${report?" "+report:""}`;
+  const subject=o.emailSubject||`${b.name}: about ${money(c.lost)} a month in missed calls`;
+  const body=o.emailBody||`Hi,\n\nI'm Bryce with Evolve. We help ${(TRADES[b.trade]||TRADES.other).label.toLowerCase()} companies in ${b.city||"the area"} stop losing jobs to missed calls.\n\nI built ${b.name} a free audit and a demo website with an AI receptionist that answers every call and chat, day or night.\n\nThe short version: based on industry averages you may be losing about ${money(c.lost)} a month (${money(c.yearly)} a year) to calls that go unanswered. Evolve would recover about ${money(c.recovered)} of that for ${money(inputsFor(l).price)}/mo.\n\n${report?"Your audit and demo: "+report+"\n\n":""}${pay?"Ready to start: "+pay+"\n\n":""}Bryce\nEvolve`;
+  $("#tabBody").innerHTML=`
+    <div class="box"><div class="label">Links</div>
+      <label class="knob" for="repUrl">Prospect report link<input id="repUrl" value="${esc(report)}" placeholder="Created by deep research, or paste one"></label>
+      <label class="knob" for="payUrl">Payment link<input id="payUrl" value="${esc(pay)}" placeholder="GHL or Stripe payment link"></label>
+      <div class="row-btns"><button id="saveLinks">Save links</button></div></div>
+    <div class="box"><div class="label">Text message</div><textarea id="smsTxt" rows="4">${esc(sms)}</textarea>
+      <div class="row-btns"><button class="primary" id="copySms">Copy text</button>${b.phone?`<a class="btn" href="sms:${esc(b.phone.replace(/[^0-9+]/g,""))}">Open Messages</a>`:""}</div>
+      ${b.phone?`<p class="note">To: <span class="num">${esc(b.phone)}</span>. Opening Messages doesn't send anything. You still tap send.</p>`:""}</div>
+    <div class="box"><div class="label">Email</div><input id="emSub" value="${esc(subject)}"><textarea id="emBody" rows="12">${esc(body)}</textarea>
+      <div class="row-btns"><button class="primary" id="copyEmail">Copy email</button></div>
+      ${o.emailTo?`<p class="note">To: ${esc(o.emailTo)}</p>`:""}</div>
+    <p class="note">Nothing is sent from Scout. You review and send every message yourself.</p>`;
+  $("#copySms").onclick=e=>copy($("#smsTxt").value,e.currentTarget);
+  $("#copyEmail").onclick=e=>copy("Subject: "+$("#emSub").value+"\n\n"+$("#emBody").value,e.currentTarget);
+  $("#saveLinks").onclick=async()=>{ if(!db||l.example) return toast("Sample lead. Not saved"); try{await db.collection("leads").doc(l.id).update({reportUrl:$("#repUrl").value.trim(),paymentLink:$("#payUrl").value.trim()});toast("Saved")}catch{toast("Could not save")} };
+}
+</script>
